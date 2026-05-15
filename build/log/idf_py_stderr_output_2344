@@ -1,0 +1,438 @@
+Command: ninja all
+CMake Error at D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/component.cmake:231 (message):
+  CMake Warning (dev) at build_properties.temp.cmake:8:
+
+    Syntax Warning in cmake code at column 106
+
+
+
+    Argument not separated from preceding token by whitespace.
+
+  Call Stack (most recent call first):
+
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:3 (include)
+
+  This warning is for project developers.  Use -Wno-dev to suppress it.
+
+
+
+  CMake Warning (dev) at
+  D:/Projects/Espressif/SPLE/SmartHome/main/CMakeLists.txt:14:
+
+    Syntax Warning in cmake code at column 28
+
+
+
+    Argument not separated from preceding token by whitespace.
+
+  Call Stack (most recent call first):
+
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:107 (include)
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:160 (__component_get_requirements)
+
+  This warning is for project developers.  Use -Wno-dev to suppress it.
+
+
+
+  CMake Warning (dev) at
+  D:/Projects/Espressif/SPLE/SmartHome/main/CMakeLists.txt:14:
+
+    Syntax Warning in cmake code at column 58
+
+
+
+    Argument not separated from preceding token by whitespace.
+
+  Call Stack (most recent call first):
+
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:107 (include)
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:160 (__component_get_requirements)
+
+  This warning is for project developers.  Use -Wno-dev to suppress it.
+
+
+
+  CMake Warning (dev) at
+  D:/Projects/Espressif/SPLE/SmartHome/main/CMakeLists.txt:18:
+
+    Syntax Warning in cmake code at column 28
+
+
+
+    Argument not separated from preceding token by whitespace.
+
+  Call Stack (most recent call first):
+
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:107 (include)
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:160 (__component_get_requirements)
+
+  This warning is for project developers.  Use -Wno-dev to suppress it.
+
+
+
+  CMake Warning (dev) at
+  D:/Projects/Espressif/SPLE/SmartHome/main/CMakeLists.txt:18:
+
+    Syntax Warning in cmake code at column 58
+
+
+
+    Argument not separated from preceding token by whitespace.
+
+  Call Stack (most recent call first):
+
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:107 (include)
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:160 (__component_get_requirements)
+
+  This warning is for project developers.  Use -Wno-dev to suppress it.
+
+
+
+  CMake Warning (dev) at
+  D:/Projects/Espressif/SPLE/SmartHome/main/CMakeLists.txt:22:
+
+    Syntax Warning in cmake code at column 28
+
+
+
+    Argument not separated from preceding token by whitespace.
+
+  Call Stack (most recent call first):
+
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:107 (include)
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:160 (__component_get_requirements)
+
+  This warning is for project developers.  Use -Wno-dev to suppress it.
+
+
+
+  CMake Warning (dev) at
+  D:/Projects/Espressif/SPLE/SmartHome/main/CMakeLists.txt:22:
+
+    Syntax Warning in cmake code at column 59
+
+
+
+    Argument not separated from preceding token by whitespace.
+
+  Call Stack (most recent call first):
+
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:107 (include)
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:160 (__component_get_requirements)
+
+  This warning is for project developers.  Use -Wno-dev to suppress it.
+
+
+
+  CMake Warning (dev) at
+  D:/Projects/Espressif/SPLE/SmartHome/main/CMakeLists.txt:26:
+
+    Syntax Warning in cmake code at column 28
+
+
+
+    Argument not separated from preceding token by whitespace.
+
+  Call Stack (most recent call first):
+
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:107 (include)
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:160 (__component_get_requirements)
+
+  This warning is for project developers.  Use -Wno-dev to suppress it.
+
+
+
+  CMake Warning (dev) at
+  D:/Projects/Espressif/SPLE/SmartHome/main/CMakeLists.txt:26:
+
+    Syntax Warning in cmake code at column 56
+
+
+
+    Argument not separated from preceding token by whitespace.
+
+  Call Stack (most recent call first):
+
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:107 (include)
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:160 (__component_get_requirements)
+
+  This warning is for project developers.  Use -Wno-dev to suppress it.
+
+
+
+  CMake Warning (dev) at
+  D:/Projects/Espressif/SPLE/SmartHome/main/CMakeLists.txt:30:
+
+    Syntax Warning in cmake code at column 28
+
+
+
+    Argument not separated from preceding token by whitespace.
+
+  Call Stack (most recent call first):
+
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:107 (include)
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:160 (__component_get_requirements)
+
+  This warning is for project developers.  Use -Wno-dev to suppress it.
+
+
+
+  CMake Warning (dev) at
+  D:/Projects/Espressif/SPLE/SmartHome/main/CMakeLists.txt:30:
+
+    Syntax Warning in cmake code at column 57
+
+
+
+    Argument not separated from preceding token by whitespace.
+
+  Call Stack (most recent call first):
+
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:107 (include)
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:160 (__component_get_requirements)
+
+  This warning is for project developers.  Use -Wno-dev to suppress it.
+
+
+
+  CMake Warning (dev) at
+  D:/Projects/Espressif/SPLE/SmartHome/main/CMakeLists.txt:34:
+
+    Syntax Warning in cmake code at column 28
+
+
+
+    Argument not separated from preceding token by whitespace.
+
+  Call Stack (most recent call first):
+
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:107 (include)
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:160 (__component_get_requirements)
+
+  This warning is for project developers.  Use -Wno-dev to suppress it.
+
+
+
+  CMake Warning (dev) at
+  D:/Projects/Espressif/SPLE/SmartHome/main/CMakeLists.txt:34:
+
+    Syntax Warning in cmake code at column 58
+
+
+
+    Argument not separated from preceding token by whitespace.
+
+  Call Stack (most recent call first):
+
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:107 (include)
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:160 (__component_get_requirements)
+
+  This warning is for project developers.  Use -Wno-dev to suppress it.
+
+
+
+  CMake Warning (dev) at
+  D:/Projects/Espressif/SPLE/SmartHome/main/CMakeLists.txt:38:
+
+    Syntax Warning in cmake code at column 28
+
+
+
+    Argument not separated from preceding token by whitespace.
+
+  Call Stack (most recent call first):
+
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:107 (include)
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:160 (__component_get_requirements)
+
+  This warning is for project developers.  Use -Wno-dev to suppress it.
+
+
+
+  CMake Warning (dev) at
+  D:/Projects/Espressif/SPLE/SmartHome/main/CMakeLists.txt:38:
+
+    Syntax Warning in cmake code at column 55
+
+
+
+    Argument not separated from preceding token by whitespace.
+
+  Call Stack (most recent call first):
+
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:107 (include)
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:160 (__component_get_requirements)
+
+  This warning is for project developers.  Use -Wno-dev to suppress it.
+
+
+
+  CMake Warning (dev) at
+  D:/Projects/Espressif/SPLE/SmartHome/main/CMakeLists.txt:42:
+
+    Syntax Warning in cmake code at column 28
+
+
+
+    Argument not separated from preceding token by whitespace.
+
+  Call Stack (most recent call first):
+
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:107 (include)
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:160 (__component_get_requirements)
+
+  This warning is for project developers.  Use -Wno-dev to suppress it.
+
+
+
+  CMake Warning (dev) at
+  D:/Projects/Espressif/SPLE/SmartHome/main/CMakeLists.txt:42:
+
+    Syntax Warning in cmake code at column 55
+
+
+
+    Argument not separated from preceding token by whitespace.
+
+  Call Stack (most recent call first):
+
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:107 (include)
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:160 (__component_get_requirements)
+
+  This warning is for project developers.  Use -Wno-dev to suppress it.
+
+
+
+  CMake Warning (dev) at
+  D:/Projects/Espressif/SPLE/SmartHome/main/CMakeLists.txt:46:
+
+    Syntax Warning in cmake code at column 28
+
+
+
+    Argument not separated from preceding token by whitespace.
+
+  Call Stack (most recent call first):
+
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:107 (include)
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:160 (__component_get_requirements)
+
+  This warning is for project developers.  Use -Wno-dev to suppress it.
+
+
+
+  CMake Warning (dev) at
+  D:/Projects/Espressif/SPLE/SmartHome/main/CMakeLists.txt:46:
+
+    Syntax Warning in cmake code at column 56
+
+
+
+    Argument not separated from preceding token by whitespace.
+
+  Call Stack (most recent call first):
+
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:107 (include)
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:160 (__component_get_requirements)
+
+  This warning is for project developers.  Use -Wno-dev to suppress it.
+
+
+
+  CMake Warning (dev) at
+  D:/Projects/Espressif/SPLE/SmartHome/main/CMakeLists.txt:50:
+
+    Syntax Warning in cmake code at column 28
+
+
+
+    Argument not separated from preceding token by whitespace.
+
+  Call Stack (most recent call first):
+
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:107 (include)
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:160 (__component_get_requirements)
+
+  This warning is for project developers.  Use -Wno-dev to suppress it.
+
+
+
+  CMake Warning (dev) at
+  D:/Projects/Espressif/SPLE/SmartHome/main/CMakeLists.txt:50:
+
+    Syntax Warning in cmake code at column 56
+
+
+
+    Argument not separated from preceding token by whitespace.
+
+  Call Stack (most recent call first):
+
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:107 (include)
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:160 (__component_get_requirements)
+
+  This warning is for project developers.  Use -Wno-dev to suppress it.
+
+
+
+  CMake Warning (dev) at
+  D:/Projects/Espressif/SPLE/SmartHome/main/CMakeLists.txt:54:
+
+    Syntax Warning in cmake code at column 28
+
+
+
+    Argument not separated from preceding token by whitespace.
+
+  Call Stack (most recent call first):
+
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:107 (include)
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:160 (__component_get_requirements)
+
+  This warning is for project developers.  Use -Wno-dev to suppress it.
+
+
+
+  CMake Error at D:/Projects/Espressif/SPLE/SmartHome/main/CMakeLists.txt:60:
+
+    Parse error.  Function missing ending ")".  Instead found unterminated
+    string with text ")
+
+
+
+    endif()
+
+
+
+
+
+
+
+    idf_component_register(
+
+
+
+        SRCS ${SRC_FILES}
+        INCLUDE_DIRS ${INCLUDE_DIRS}
+
+
+
+    )".
+
+  Call Stack (most recent call first):
+
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:107 (include)
+    D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/scripts/component_get_requirements.cmake:160 (__component_get_requirements)
+
+
+
+
+
+Call Stack (most recent call first):
+  D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/build.cmake:732 (__component_get_requirements)
+  D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/tools/cmake/project.cmake:773 (idf_build_process)
+  CMakeLists.txt:6 (project)
+
+
+ninja: error: rebuilding 'build.ninja': subcommand failed

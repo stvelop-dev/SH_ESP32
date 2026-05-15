@@ -1,0 +1,48 @@
+Command: cmake -G Ninja -B D:\Projects\Espressif\SPLE\SmartHome\build -DPYTHON_DEPS_CHECKED=1 -DPYTHON=C:\Espressif\tools\python\v6.0.1\venv\Scripts\python.exe -DESP_PLATFORM=1 -DCCACHE_ENABLE=False D:\Projects\Espressif\SPLE\SmartHome
+Configuration Report                                                           
++-----------------------------------------------------------------------------+
+|  Parser Version: 1                                                          |
+|  Verbosity: default                                                         |
+|  Defaults policy: sdkconfig                                                 |
+|  Status: Finished with notifications                                        |
+|                                                                             |
+| Disabled Symbols/Choices With User-Set Value                                |
+| +-------------------------------------------------------------------------+ |
+| | * PARTITION_TABLE_CUSTOM_FILENAME (defined at                           | |
+| | D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/components/partitià | |
+| | with user-set value partitions.csv from                                 | |
+| | D:/Projects/Espressif/SPLE/SmartHome/sdkconfig                          | |
+| | * ESP_INTR_IN_IRAM (defined at                                          | |
+| | D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/components/esp_hw_à | |
+| | with user-set value y from                                              | |
+| | D:/Projects/Espressif/SPLE/SmartHome/sdkconfig                          | |
+| | * LIBC_MISC_IN_IRAM (defined at                                         | |
+| | D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/components/esp_libà | |
+| | with user-set value y from                                              | |
+| | D:/Projects/Espressif/SPLE/SmartHome/sdkconfig                          | |
+| | * ESP_ROM_PRINT_IN_IRAM (defined at                                     | |
+| | D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/components/esp_romà | |
+| | with user-set value y from                                              | |
+| | D:/Projects/Espressif/SPLE/SmartHome/sdkconfig                          | |
+| | * ESP_CONSOLE_UART_BAUDRATE (defined at                                 | |
+| | D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/components/esp_stdà | |
+| | with user-set value 115200 from                                         | |
+| | D:/Projects/Espressif/SPLE/SmartHome/sdkconfig                          | |
+| | * ESP_SYSTEM_IN_IRAM (defined at                                        | |
+| | D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/components/esp_sysà | |
+| | with user-set value y from                                              | |
+| | D:/Projects/Espressif/SPLE/SmartHome/sdkconfig                          | |
+| | * ESP_TIMER_IN_IRAM (defined at                                         | |
+| | D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/components/esp_timà | |
+| | with user-set value y from                                              | |
+| | D:/Projects/Espressif/SPLE/SmartHome/sdkconfig                          | |
+| | * LOG_IN_IRAM (defined at                                               | |
+| | D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/components/log/Kcoà | |
+| | with user-set value y from                                              | |
+| | D:/Projects/Espressif/SPLE/SmartHome/sdkconfig                          | |
+| | * SPI_FLASH_PLACE_FUNCTIONS_IN_IRAM (defined at                         | |
+| | D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/components/spi_flaà | |
+| | with user-set value y from                                              | |
+| | D:/Projects/Espressif/SPLE/SmartHome/sdkconfig                          | |
+| +-------------------------------------------------------------------------+ |
++-----------------------------------------------------------------------------+

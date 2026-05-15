@@ -1,0 +1,47 @@
+menu "SPL Features"
+
+config FEATURE_AUTOMATION_NONE
+    bool "Enable none automation"
+    default n
+
+config FEATURE_AUTOMATION_TIME
+    bool "Enable timebased automation"
+    default n
+
+config FEATURE_AUTOMATION_EVENT
+    bool "Enable eventbased automation"
+    default n
+
+config FEATURE_INTERFACE_CLI
+    bool "Enable CLI interface"
+    default n
+
+config FEATURE_INTERFACE_REST
+    bool "Enable REST interface"
+    default n
+
+config FEATURE_INTERFACE_WEBUI
+    bool "Enable WebUI interface"
+    default n
+
+config FEATURE_DEVICE_LIGHT
+    bool "Enable light device"
+    default n
+
+config FEATURE_DEVICE_RELAY
+    bool "Enable relay device"
+    default n
+
+config FEATURE_DEVICE_SENSOR
+    bool "Enable sensor device"
+    default n
+
+config FEATURE_SECURITY_NONE
+    bool "Enable none security"
+    default n
+
+config FEATURE_SECURITY_AUTH
+    bool "Enable authentication security"
+    default n
+
+endmenu
