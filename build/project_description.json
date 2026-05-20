@@ -1,7 +1,7 @@
 {
     "version":            "1.3",
     "project_name":       "SmartHome",
-    "project_version":    "1",
+    "project_version":    "798a732-dirty",
     "project_path":       "D:/Projects/Espressif/SPLE/SmartHome",
     "idf_path":           "D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf",
     "build_dir":          "D:/Projects/Espressif/SPLE/SmartHome/build",
@@ -1765,7 +1765,7 @@
             "managed_reqs": [],
             "managed_priv_reqs": [],
             "file": "D:/Projects/Espressif/SPLE/SmartHome/build/esp-idf/main/libmain.a",
-            "sources": [ "D:/Projects/Espressif/SPLE/SmartHome/main/app_main.c", "D:/Projects/Espressif/SPLE/SmartHome/main/core/device_manager.c", "D:/Projects/Espressif/SPLE/SmartHome/main/core/gpio_control.c", "D:/Projects/Espressif/SPLE/SmartHome/main/core/feature_registry.c", "D:/Projects/Espressif/SPLE/SmartHome/main/features/automation/aut_none.c", "D:/Projects/Espressif/SPLE/SmartHome/main/features/interface/int_cli.c", "D:/Projects/Espressif/SPLE/SmartHome/main/features/device/dev_light.c", "D:/Projects/Espressif/SPLE/SmartHome/main/features/security/sec_none.c" ],
+            "sources": [ "D:/Projects/Espressif/SPLE/SmartHome/main/app_main.c", "D:/Projects/Espressif/SPLE/SmartHome/main/core/device_manager.c", "D:/Projects/Espressif/SPLE/SmartHome/main/core/io_control.c", "D:/Projects/Espressif/SPLE/SmartHome/main/core/feature_registry.c", "D:/Projects/Espressif/SPLE/SmartHome/main/features/automation/aut_none.c", "D:/Projects/Espressif/SPLE/SmartHome/main/features/interface/int_cli.c", "D:/Projects/Espressif/SPLE/SmartHome/main/features/device/dev_light.c", "D:/Projects/Espressif/SPLE/SmartHome/main/features/security/sec_none.c" ],
             "include_dirs": [ "include/core", "include/features/automation", "include/features/interface", "include/features/device", "include/features/security" ]
         },
         "mbedtls": {

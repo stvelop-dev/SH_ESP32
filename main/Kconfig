@@ -28,9 +28,31 @@ config FEATURE_DEVICE_LIGHT
     bool "Enable light device"
     default n
 
+config LIGHT_COUNT
+    int "Number of lights"
+    default 1
+    range 0 16
+    depends on FEATURE_DEVICE_LIGHT
+
+config LIGHT_START_GPIO
+    int "First light GPIO"
+    default 2
+    depends on FEATURE_DEVICE_LIGHT
+
 config FEATURE_DEVICE_RELAY
     bool "Enable relay device"
     default n
+
+config RELAY_COUNT
+    int "Number of relays"
+    default 1
+    range 0 16
+    depends on FEATURE_RELAY
+
+config RELAY_START_GPIO
+    int "First relay GPIO"
+    default 10
+    depends on FEATURE_RELAY
 
 config FEATURE_DEVICE_SENSOR
     bool "Enable sensor device"

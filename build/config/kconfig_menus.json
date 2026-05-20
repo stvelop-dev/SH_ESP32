@@ -34527,7 +34527,31 @@
                         "type": "bool"
                     },
                     {
-                        "children": [],
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "FEATURE_DEVICE_LIGHT",
+                                "help": null,
+                                "id": "LIGHT_COUNT",
+                                "name": "LIGHT_COUNT",
+                                "range": [
+                                    0,
+                                    16
+                                ],
+                                "title": "Number of lights",
+                                "type": "int"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "FEATURE_DEVICE_LIGHT",
+                                "help": null,
+                                "id": "LIGHT_START_GPIO",
+                                "name": "LIGHT_START_GPIO",
+                                "range": null,
+                                "title": "First light GPIO",
+                                "type": "int"
+                            }
+                        ],
                         "depends_on": null,
                         "help": null,
                         "id": "FEATURE_DEVICE_LIGHT",
@@ -34545,6 +34569,26 @@
                         "range": null,
                         "title": "Enable relay device",
                         "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "FEATURE_RELAY",
+                        "help": null,
+                        "id": "RELAY_COUNT",
+                        "name": "RELAY_COUNT",
+                        "range": null,
+                        "title": "Number of relays",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "FEATURE_RELAY",
+                        "help": null,
+                        "id": "RELAY_START_GPIO",
+                        "name": "RELAY_START_GPIO",
+                        "range": null,
+                        "title": "First relay GPIO",
+                        "type": "int"
                     },
                     {
                         "children": [],

@@ -574,6 +574,8 @@
     "LIBC_TIME_SYSCALL_USE_NONE": false,
     "LIBC_TIME_SYSCALL_USE_RTC": false,
     "LIBC_TIME_SYSCALL_USE_RTC_HRT": true,
+    "LIGHT_COUNT": 1,
+    "LIGHT_START_GPIO": 2,
     "LOG_COLORS": false,
     "LOG_DEFAULT_LEVEL": 3,
     "LOG_DEFAULT_LEVEL_DEBUG": false,

@@ -1,7 +1,7 @@
 set(SRC_FILES
     "app_main.c"
     "core/device_manager.c"
-    "core/gpio_control.c"
+    "core/io_control.c"
     "core/feature_registry.c"
 )
 
