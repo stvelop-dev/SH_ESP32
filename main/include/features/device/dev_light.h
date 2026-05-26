@@ -1,3 +1,3 @@
 #pragma once
 
-void lightDevice_start(void);
+void lightDevice_init(void);

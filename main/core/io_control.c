@@ -6,7 +6,7 @@
 
 void io_control_init(void)
 {
-    device_manager_init();
+    deviceManager_init();
 }
 
 void io_turn_on(int device_id)
@@ -29,6 +29,15 @@ void io_turn_off(int device_id)
     }
 
     device_set_on(device, false);
+}
+
+int io_control_get_device_value(int id)
+{
+    device_t *dev = device_get_by_id(id);
+
+    if (dev == NULL) return -1;
+
+    return device_get_value(dev);
 }
 
 void io_set_brightness(int device_id, int brightness)

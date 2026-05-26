@@ -1,0 +1,33 @@
+Command: cmake -G Ninja -B D:\Projects\Espressif\SPLE\SmartHome\build -DPYTHON_DEPS_CHECKED=1 -DPYTHON=C:\Espressif\tools\python\v6.0.1\venv\Scripts\python.exe -DESP_PLATFORM=1 -DCCACHE_ENABLE=False D:\Projects\Espressif\SPLE\SmartHome
+Configuration Report                                                           
++-----------------------------------------------------------------------------+
+|  Parser Version: 1                                                          |
+|  Verbosity: default                                                         |
+|  Defaults policy: sdkconfig                                                 |
+|  Status: Finished with notifications                                        |
+|                                                                             |
+| Multiple Symbol/Choice Definitions                                          |
+| +-------------------------------------------------------------------------+ |
+| | Multiple definitions will have higher severity in the future. Please,   | |
+| | visit                                                                   | |
+| | https://docs.espressif.com/projects/esp-idf-kconfig/en/latest/kconfiglà | |
+| | for more information.                                                   | |
+| | RELAY_COUNT                                                             | |
+| |         D:\Projects\Espressif\SPLE\SmartHome\main\Kconfig:61            | |
+| |         D:\Projects\Espressif\SPLE\SmartHome\main\Kconfig:46            | |
+| | RELAY_START_GPIO                                                        | |
+| |         D:\Projects\Espressif\SPLE\SmartHome\main\Kconfig:52            | |
+| |         D:\Projects\Espressif\SPLE\SmartHome\main\Kconfig:67            | |
+| +-------------------------------------------------------------------------+ |
+| Disabled Symbols/Choices With User-Set Value                                |
+| +-------------------------------------------------------------------------+ |
+| | * RELAY_COUNT (defined at                                               | |
+| | D:/Projects/Espressif/SPLE/SmartHome/main/Kconfig:46,                   | |
+| | D:/Projects/Espressif/SPLE/SmartHome/main/Kconfig:61) with user-set     | |
+| | value 1 from C:\Users\Sven\AppData\Local\Temp\kconfgen_tmp4bp0f6fd      | |
+| | * RELAY_START_GPIO (defined at                                          | |
+| | D:/Projects/Espressif/SPLE/SmartHome/main/Kconfig:52,                   | |
+| | D:/Projects/Espressif/SPLE/SmartHome/main/Kconfig:67) with user-set     | |
+| | value 4 from C:\Users\Sven\AppData\Local\Temp\kconfgen_tmp4bp0f6fd      | |
+| +-------------------------------------------------------------------------+ |
++-----------------------------------------------------------------------------+

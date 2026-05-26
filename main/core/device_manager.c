@@ -16,35 +16,28 @@
     #define RELAY_COUNT 0
 #endif
 
-#define DEVICE_COUNT (LIGHT_COUNT + RELAY_COUNT)
+#if CONFIG_FEATURE_DEVICE_SENSOR
+    #define SENSOR_COUNT CONFIG_SENSOR_COUNT
+#else
+    #define SENSOR_COUNT 0
+#endif
+
+#define DEVICE_COUNT (LIGHT_COUNT + RELAY_COUNT + SENSOR_COUNT)
 
 static device_t devices[DEVICE_COUNT];
 
-static void device_init_gpio(device_t *device)
+void deviceManager_init(void)
 {
-    gpio_reset_pin(device->gpio_pin);
-    gpio_set_direction(device->gpio_pin, GPIO_MODE_OUTPUT);
-    gpio_set_level(device->gpio_pin, 0);
-}
-
-void device_manager_init(void)
-{
-    int index = 0;
-
-#if CONFIG_FEATURE_DEVICE_LIGHT
-    for (int i = 0; i < LIGHT_COUNT; i++) {
-        devices[index].id = index;
-        devices[index].name = "Light";
-        devices[index].type = DEVICE_TYPE_LIGHT;
-        devices[index].gpio_pin = CONFIG_LIGHT_START_GPIO + i;
-        devices[index].is_on = false;
-        devices[index].brightness = 0;
-        device_init_gpio(&devices[index]);
-        index++;
+    for (int i = 0; i < DEVICE_COUNT; i++) {
+        devices[i].id = i;
+        devices[i].name = NULL;
+        devices[i].type = DEVICE_TYPE_UNKNOWN;
+        devices[i].gpio_pin = -1;
+        devices[i].is_on = false;
+        devices[i].brightness = 0;
     }
-#endif
 
-#if CONFIG_FEATURE_DEVICE_RELAY
+/*#if CONFIG_FEATURE_DEVICE_RELAY
     for (int i = 0; i < RELAY_COUNT; i++) {
         devices[index].id = index;
         devices[index].name = "Relay";
@@ -55,7 +48,7 @@ void device_manager_init(void)
         device_init_gpio(&devices[index]);
         index++;
     }
-#endif
+#endif*/
 }
 
 int device_get_count(void)
@@ -80,4 +73,11 @@ void device_set_on(device_t *device, bool state)
 
     device->is_on = state;
     gpio_set_level(device->gpio_pin, state ? 1 : 0);
+}
+
+int device_get_value(device_t *device)
+{
+    if (device == NULL) return -1;
+
+    return gpio_get_level(device->gpio_pin);
 }

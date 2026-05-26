@@ -1,3 +1,3 @@
 #pragma once
 
-void relayDevice_start(void);
+void relayDevice_init(void);

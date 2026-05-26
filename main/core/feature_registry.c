@@ -73,15 +73,15 @@ void feature_init_all(void)
 #endif
 
 #if CONFIG_FEATURE_DEVICE_LIGHT
-    lightDevice_start();
+    lightDevice_init();
 #endif
 
 #if CONFIG_FEATURE_DEVICE_RELAY
-    relayDevice_start();
+    relayDevice_init();
 #endif
 
 #if CONFIG_FEATURE_DEVICE_SENSOR
-    sensorDevice_start();
+    sensorDevice_init();
 #endif
 
 #if CONFIG_FEATURE_SECURITY_NONE

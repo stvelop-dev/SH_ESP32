@@ -1,3 +1,3 @@
 #pragma once
 
-void sensorDevice_start(void);
+void sensorDevice_init(void);
