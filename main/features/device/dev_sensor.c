@@ -1,13 +1,17 @@
-#include "dev_sensor.h"
-
 #include "sdkconfig.h"
+#include "esp_log.h"
 #include "driver/gpio.h"
+
+#include "dev_sensor.h"
 #include "device_manager.h"
+
+static const char *TAG = "Feat_Sensor";
 
 static void sensor_initGpio(device_t *device)
 {
     gpio_reset_pin(device->gpio_pin);
     gpio_set_direction(device->gpio_pin, GPIO_MODE_INPUT);
+    gpio_set_pull_mode(device->gpio_pin, GPIO_PULLUP_ONLY);
 }
 
 void sensorDevice_init(void)
@@ -40,6 +44,8 @@ void sensorDevice_init(void)
         device->brightness = -1;
 
         sensor_initGpio(device);
+
+        ESP_LOGI(TAG, "Sensor created with id %d", id);
     }
 #endif
 }

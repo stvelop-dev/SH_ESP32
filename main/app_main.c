@@ -8,13 +8,9 @@
 void app_main(void)
 {
     io_control_init();
-    feature_init_all();
+    featureRegistry_Init();
     
     while (true) {
-        io_turn_on(0);
-        vTaskDelay(pdMS_TO_TICKS(1000));
-
-        io_turn_off(0);
-        vTaskDelay(pdMS_TO_TICKS(1000));
+        featureRegistry_Process();
     }
 }

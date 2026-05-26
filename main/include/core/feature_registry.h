@@ -1,3 +1,4 @@
 #pragma once
 
-void feature_init_all(void);
+void featureRegistry_Init(void);
+void featureRegistry_Process(void);

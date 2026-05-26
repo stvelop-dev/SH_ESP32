@@ -1,3 +1,4 @@
 #pragma once
 
-void noneAutomation_start(void);
+void automationNone_init(void);
+void automationNone_process(void);

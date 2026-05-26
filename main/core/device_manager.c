@@ -1,4 +1,5 @@
 #include <stddef.h>
+#include "esp_log.h"
 
 #include "sdkconfig.h"
 #include "driver/gpio.h"
@@ -24,6 +25,8 @@
 
 #define DEVICE_COUNT (LIGHT_COUNT + RELAY_COUNT + SENSOR_COUNT)
 
+static const char *TAG = "Core_DeMa";
+
 static device_t devices[DEVICE_COUNT];
 
 void deviceManager_init(void)
@@ -37,18 +40,7 @@ void deviceManager_init(void)
         devices[i].brightness = 0;
     }
 
-/*#if CONFIG_FEATURE_DEVICE_RELAY
-    for (int i = 0; i < RELAY_COUNT; i++) {
-        devices[index].id = index;
-        devices[index].name = "Relay";
-        devices[index].type = DEVICE_TYPE_RELAY;
-        devices[index].gpio_pin = CONFIG_RELAY_START_GPIO + i;
-        devices[index].is_on = false;
-        devices[index].brightness = -1;
-        device_init_gpio(&devices[index]);
-        index++;
-    }
-#endif*/
+    ESP_LOGI(TAG, "%d devices created.", DEVICE_COUNT);
 }
 
 int device_get_count(void)

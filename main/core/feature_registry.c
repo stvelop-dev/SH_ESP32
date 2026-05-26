@@ -46,18 +46,30 @@
 #endif
 
 
-void feature_init_all(void)
+void featureRegistry_Init(void)
 {
+#if CONFIG_FEATURE_DEVICE_LIGHT
+    lightDevice_init();
+#endif
+
+#if CONFIG_FEATURE_DEVICE_RELAY
+    relayDevice_init();
+#endif
+
+#if CONFIG_FEATURE_DEVICE_SENSOR
+    sensorDevice_init();
+#endif
+
 #if CONFIG_FEATURE_AUTOMATION_NONE
-    noneAutomation_start();
+    automationNone_init();
 #endif
 
 #if CONFIG_FEATURE_AUTOMATION_TIME
-    timebasedAutomation_start();
+    automationTimebased_init();
 #endif
 
 #if CONFIG_FEATURE_AUTOMATION_EVENT
-    eventbasedAutomation_start();
+    automationEventbased_init();
 #endif
 
 #if CONFIG_FEATURE_INTERFACE_CLI
@@ -72,18 +84,6 @@ void feature_init_all(void)
     webuiIntferface_start();
 #endif
 
-#if CONFIG_FEATURE_DEVICE_LIGHT
-    lightDevice_init();
-#endif
-
-#if CONFIG_FEATURE_DEVICE_RELAY
-    relayDevice_init();
-#endif
-
-#if CONFIG_FEATURE_DEVICE_SENSOR
-    sensorDevice_init();
-#endif
-
 #if CONFIG_FEATURE_SECURITY_NONE
     noneSecurity_start();
 #endif
@@ -91,5 +91,19 @@ void feature_init_all(void)
 #if CONFIG_FEATURE_SECURITY_AUTH
     authenticationSecurity_start();
 #endif
+}
 
+void featureRegistry_Process(void)
+{
+#if CONFIG_FEATURE_AUTOMATION_NONE
+    automationNone_process();
+#endif
+
+#if CONFIG_FEATURE_AUTOMATION_TIME
+    automationTimebased_process();
+#endif
+
+#if CONFIG_FEATURE_AUTOMATION_EVENT
+    automationEventbased_process();
+#endif
 }

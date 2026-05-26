@@ -1,7 +1,11 @@
+#include "sdkconfig.h"
+#include "esp_log.h"
+#include "driver/gpio.h"
+
 #include "dev_light.h"
 #include "device_manager.h"
-#include "sdkconfig.h"
-#include "driver/gpio.h"
+
+static const char *TAG = "Feat_Light";
 
 static void lightDevice_initGpio(device_t *device)
 {
@@ -28,6 +32,8 @@ void lightDevice_init(void)
         device->brightness = 0;
 
         lightDevice_initGpio(device);
+
+        ESP_LOGI(TAG, "Light created with id %d", i);
     }
 #endif
 }

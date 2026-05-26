@@ -1,8 +1,11 @@
-#include "dev_relay.h"
-
 #include "sdkconfig.h"
+#include "esp_log.h"
 #include "driver/gpio.h"
+
+#include "dev_relay.h"
 #include "device_manager.h"
+
+static const char *TAG = "Feat_Relay";
 
 static void relayDevice_initGpio(device_t *device)
 {
@@ -37,6 +40,8 @@ void relayDevice_init(void)
         device->brightness = -1;
 
         relayDevice_initGpio(device);
+
+        ESP_LOGI(TAG, "Relay created with id %d", id);
     }
 #endif
 }
