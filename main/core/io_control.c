@@ -4,45 +4,48 @@
 #include "io_control.h"
 #include "device_manager.h"
 
-void io_control_init(void)
+void ioControl_init(void)
 {
     deviceManager_init();
 }
 
-void ioControl_setDeviceOn(int device_id, bool state)
+bool ioControl_exists(int id)
 {
-    device_t *device = device_get_by_id(device_id);
-
-    if (device == NULL) {
-        return;
-    }
-
-    device_set_on(device, state);
+    return deviceManager_getId(id) != NULL;
 }
 
-void ioControl_toggleDevice(int device_id)
+int ioControl_getType(int id)
 {
-    device_t *device = device_get_by_id(device_id);
-
-    if (device == NULL) {
-        return;
-    }
-
-    device_set_on(device, !device->is_on);
-}
-
-int io_control_get_device_value(int id)
-{
-    device_t *dev = device_get_by_id(id);
+    device_t *dev = deviceManager_getId(id);
 
     if (dev == NULL) return -1;
 
-    return device_get_value(dev);
+    return dev->type;
 }
 
-void io_set_brightness(int device_id, int brightness)
+int ioControl_getValue(int id)
 {
-    device_t *device = device_get_by_id(device_id);
+    device_t *dev = deviceManager_getId(id);
+
+    if (dev == NULL) return -1;
+
+    return deviceManager_getValue(dev);
+}
+
+void ioControl_setDevice(int device_id, bool state)
+{
+    device_t *device = deviceManager_getId(device_id);
+
+    if (device == NULL) {
+        return;
+    }
+
+    deviceManager_setOn(device, state);
+}
+
+void ioControl_setBrightness(int device_id, int brightness)
+{
+    device_t *device = deviceManager_getId(device_id);
 
     if (device == NULL) {
         return;
@@ -52,5 +55,5 @@ void io_set_brightness(int device_id, int brightness)
         return;
     }
 
-    device_set_brightness(device, brightness);
+    deviceManager_setBrightness(device, brightness);
 }

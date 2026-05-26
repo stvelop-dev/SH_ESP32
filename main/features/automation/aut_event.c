@@ -3,7 +3,7 @@
 
 #include "aut_event.h"
 #include "io_control.h"
-#include "device_manager.h"
+#include "device_types.h"
 
 #define MAX_EVENT_RULES 4
 
@@ -24,17 +24,13 @@ void automationEventbased_addRule(int sensor_id, int target_device_id,
     ESP_LOGI(TAG, "Create Eventrule:");
     if (rule_count >= MAX_EVENT_RULES) return;
 
-    device_t *sensor = device_get_by_id(sensor_id);
-    if (sensor == NULL) return;
-    if (sensor->type != DEVICE_TYPE_SENSOR) return;
+    if (ioControl_getType(sensor_id) != DEVICE_TYPE_SENSOR) return;
+    ESP_LOGI(TAG, "Sensor %d available", sensor_id);
 
-    ESP_LOGI(TAG, "Sensor %d available", sensor->id);
-
-    device_t *target = device_get_by_id(target_device_id);
-    if (target->type != DEVICE_TYPE_LIGHT &&
-        target->type != DEVICE_TYPE_RELAY) return;
-
-    ESP_LOGI(TAG, "Target %d available", target->id);
+    int target_type = ioControl_getType(target_device_id);
+    if (target_type != DEVICE_TYPE_LIGHT &&
+        target_type != DEVICE_TYPE_RELAY) return;
+    ESP_LOGI(TAG, "Target %d available", target_device_id);
 
     rules[rule_count++] = (event_rule_t){
         sensor_id,
@@ -51,7 +47,7 @@ void automationEventbased_addRule(int sensor_id, int target_device_id,
 void automationEventbased_process(void)
 {
     for (int i = 0; i < rule_count; i++) {
-        int value = io_control_get_device_value(rules[i].sensor_id);
+        int value = ioControl_getValue(rules[i].sensor_id);
         if (value < 0) continue;
 
         if (value != rules[i].last_value) {
@@ -62,14 +58,10 @@ void automationEventbased_process(void)
 
             rules[i].last_value = value;
         }
-        
-        device_t *sensor = device_get_by_id(rules[i].sensor_id);
-
-        if (sensor == NULL) continue;
 
         if (value == rules[i].trigger_state) {
             if (!rules[i].already_triggered) {
-                ioControl_setDeviceOn(rules[i].target_device_id, rules[i].target_state);
+                ioControl_setDevice(rules[i].target_device_id, rules[i].target_state);
                 rules[i].already_triggered = true;
             }
         } else {

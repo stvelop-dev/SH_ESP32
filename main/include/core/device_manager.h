@@ -1,13 +1,7 @@
 #pragma once
 
 #include <stdbool.h>
-
-typedef enum {
-    DEVICE_TYPE_UNKNOWN = 0,
-    DEVICE_TYPE_LIGHT,
-    DEVICE_TYPE_RELAY,
-    DEVICE_TYPE_SENSOR
-} device_type_t;
+#include "device_types.h"
 
 typedef struct {
     int id;
@@ -20,9 +14,9 @@ typedef struct {
 
 void deviceManager_init(void);
 
-int device_get_count(void);
-int device_get_value(device_t *device);
-device_t *device_get_by_id(int id);
+int deviceManager_getCount(void);
+int deviceManager_getValue(device_t *device);
+device_t *deviceManager_getId(int id);
 
-void device_set_on(device_t *device, bool on);
-void device_set_brightness(device_t *device, int brightness);
+void deviceManager_setOn(device_t *device, bool on);
+void deviceManager_setBrightness(device_t *device, int brightness);

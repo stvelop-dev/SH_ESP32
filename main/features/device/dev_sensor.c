@@ -3,11 +3,12 @@
 #include "driver/gpio.h"
 
 #include "dev_sensor.h"
+#include "device_types.h"
 #include "device_manager.h"
 
 static const char *TAG = "Feat_Sensor";
 
-static void sensor_initGpio(device_t *device)
+static void sensorDevice_initGpio(device_t *device)
 {
     gpio_reset_pin(device->gpio_pin);
     gpio_set_direction(device->gpio_pin, GPIO_MODE_INPUT);
@@ -30,7 +31,7 @@ void sensorDevice_init(void)
     for (int i = 0; i < CONFIG_SENSOR_COUNT; i++) {
         int id = start_id + i;
 
-        device_t *device = device_get_by_id(id);
+        device_t *device = deviceManager_getId(id);
 
         if (device == NULL) {
             continue;
@@ -43,9 +44,9 @@ void sensorDevice_init(void)
         device->is_on = false;
         device->brightness = -1;
 
-        sensor_initGpio(device);
+        sensorDevice_initGpio(device);
 
-        ESP_LOGI(TAG, "Sensor created with id %d", id);
+        ESP_LOGI(TAG, "Sensor created with id %d on pin %d", id, device->gpio_pin);
     }
 #endif
 }

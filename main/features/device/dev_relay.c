@@ -3,6 +3,7 @@
 #include "driver/gpio.h"
 
 #include "dev_relay.h"
+#include "device_types.h"
 #include "device_manager.h"
 
 static const char *TAG = "Feat_Relay";
@@ -26,7 +27,7 @@ void relayDevice_init(void)
     for (int i = 0; i < CONFIG_RELAY_COUNT; i++) {
         int id = start_id + i;
 
-        device_t *device = device_get_by_id(id);
+        device_t *device = deviceManager_getId(id);
 
         if (device == NULL) {
             continue;
@@ -41,7 +42,7 @@ void relayDevice_init(void)
 
         relayDevice_initGpio(device);
 
-        ESP_LOGI(TAG, "Relay created with id %d", id);
+        ESP_LOGI(TAG, "Relay created with id %d on pin %d", id, device->gpio_pin);
     }
 #endif
 }

@@ -43,12 +43,12 @@ void deviceManager_init(void)
     ESP_LOGI(TAG, "%d devices created.", DEVICE_COUNT);
 }
 
-int device_get_count(void)
+int deviceManager_getCount(void)
 {
     return DEVICE_COUNT;
 }
 
-device_t *device_get_by_id(int id)
+device_t *deviceManager_getId(int id)
 {
     if (id < 0 || id >= DEVICE_COUNT) {
         return NULL;
@@ -57,19 +57,17 @@ device_t *device_get_by_id(int id)
     return &devices[id];
 }
 
-void device_set_on(device_t *device, bool state)
+void deviceManager_setOn(device_t *device, bool state)
 {
-    if (device == NULL) {
-        return;
-    }
-
     device->is_on = state;
     gpio_set_level(device->gpio_pin, state ? 1 : 0);
 }
 
-int device_get_value(device_t *device)
+int deviceManager_getValue(device_t *device)
 {
-    if (device == NULL) return -1;
-
     return gpio_get_level(device->gpio_pin);
+}
+
+void deviceManager_setBrightness(device_t *device, int brightness) {
+
 }

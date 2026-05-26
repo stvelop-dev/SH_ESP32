@@ -7,9 +7,11 @@
 
 void app_main(void)
 {
-    io_control_init();
+    //setup
+    ioControl_init();
     featureRegistry_Init();
     
+    //loop
     while (true) {
         featureRegistry_Process();
     }

@@ -4,7 +4,7 @@
 
 #include "aut_time.h"
 #include "io_control.h"
-#include "device_manager.h"
+#include "device_types.h"
 
 #define MAX_RULES 4
 
@@ -44,11 +44,11 @@ void automationTimebased_addRule(int hour, int minute, int device_id, bool state
     ESP_LOGI(TAG, "Create Timerule:");
     if (rule_count >= MAX_RULES) return;
 
-    device_t *target = device_get_by_id(device_id);
-    if (target->type != DEVICE_TYPE_LIGHT &&
-        target->type != DEVICE_TYPE_RELAY) return;
+    int target_type = ioControl_getType(device_id);
+    if (target_type != DEVICE_TYPE_LIGHT &&
+        target_type != DEVICE_TYPE_RELAY) return;
 
-    ESP_LOGI(TAG, "Device %d available", target->id);
+    ESP_LOGI(TAG, "Device %d available", device_id);
 
     rules[rule_count++] = (time_rule_t){hour, minute, device_id, state};
 
@@ -64,7 +64,7 @@ void automationTimebased_process(void)
         if (rules[i].hour == hour &&
             rules[i].minute == minute) {
 
-            ioControl_setDeviceOn(rules[i].device_id, rules[i].turn_on);
+            ioControl_setDevice(rules[i].device_id, rules[i].turn_on);
             ESP_LOGI(TAG, "Timerule %d triggered", i);
         }
     }

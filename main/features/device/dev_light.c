@@ -3,6 +3,7 @@
 #include "driver/gpio.h"
 
 #include "dev_light.h"
+#include "device_types.h"
 #include "device_manager.h"
 
 static const char *TAG = "Feat_Light";
@@ -18,7 +19,7 @@ void lightDevice_init(void)
 {
 #if CONFIG_FEATURE_DEVICE_LIGHT
     for (int i = 0; i < CONFIG_LIGHT_COUNT; i++) {
-        device_t *device = device_get_by_id(i);
+        device_t *device = deviceManager_getId(i);
 
         if (device == NULL) {
             continue;
@@ -33,7 +34,7 @@ void lightDevice_init(void)
 
         lightDevice_initGpio(device);
 
-        ESP_LOGI(TAG, "Light created with id %d", i);
+        ESP_LOGI(TAG, "Light created with id %d on pin %d", i, device->gpio_pin);
     }
 #endif
 }
