@@ -10,7 +10,7 @@
 #include "io_control.h"
 #include "device_manager.h"
 
-static const char *TAG = "Feat_CLI";
+static const char *TAG = "Feat_Cli";
 
 static void cliInterface_printHelp(void)
 {

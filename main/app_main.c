@@ -14,5 +14,6 @@ void app_main(void)
     //loop
     while (true) {
         featureRegistry_Process();
+        vTaskDelay(pdMS_TO_TICKS(100));
     }
 }

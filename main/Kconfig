@@ -7,6 +7,7 @@ config FEATURE_AUTOMATION_NONE
 config FEATURE_AUTOMATION_TIME
     bool "Enable timebased automation"
     default n
+    depends on FEATURE_SERVICES_SYSTIME
 
 config FEATURE_AUTOMATION_EVENT
     bool "Enable eventbased automation"
@@ -19,10 +20,12 @@ config FEATURE_INTERFACE_CLI
 config FEATURE_INTERFACE_REST
     bool "Enable REST interface"
     default n
+    depends on FEATURE_SERVICES_WIFIAP
 
 config FEATURE_INTERFACE_WEBUI
     bool "Enable WebUI interface"
     default n
+    depends on FEATURE_SERVICES_WIFIAP
 
 config FEATURE_DEVICE_LIGHT
     bool "Enable light device"
@@ -75,6 +78,14 @@ config FEATURE_SECURITY_NONE
 
 config FEATURE_SECURITY_AUTH
     bool "Enable authentication security"
+    default n
+
+config FEATURE_SERVICES_WIFIAP
+    bool "Enable WiFi Access Point"
+    default n
+
+config FEATURE_SERVICES_SYSTIME
+    bool "Enable system time service"
     default n
 
 endmenu

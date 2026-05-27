@@ -34478,7 +34478,7 @@
                     },
                     {
                         "children": [],
-                        "depends_on": null,
+                        "depends_on": "FEATURE_SERVICES_SYSTIME",
                         "help": null,
                         "id": "FEATURE_AUTOMATION_TIME",
                         "name": "FEATURE_AUTOMATION_TIME",
@@ -34508,7 +34508,7 @@
                     },
                     {
                         "children": [],
-                        "depends_on": null,
+                        "depends_on": "FEATURE_SERVICES_WIFIAP",
                         "help": null,
                         "id": "FEATURE_INTERFACE_REST",
                         "name": "FEATURE_INTERFACE_REST",
@@ -34518,7 +34518,7 @@
                     },
                     {
                         "children": [],
-                        "depends_on": null,
+                        "depends_on": "FEATURE_SERVICES_WIFIAP",
                         "help": null,
                         "id": "FEATURE_INTERFACE_WEBUI",
                         "name": "FEATURE_INTERFACE_WEBUI",
@@ -34568,10 +34568,7 @@
                                 "help": null,
                                 "id": "RELAY_COUNT",
                                 "name": "RELAY_COUNT",
-                                "range": [
-                                    0,
-                                    4
-                                ],
+                                "range": null,
                                 "title": "Number of relays",
                                 "type": "int"
                             },
@@ -34602,10 +34599,7 @@
                                 "help": null,
                                 "id": "SENSOR_COUNT",
                                 "name": "SENSOR_COUNT",
-                                "range": [
-                                    0,
-                                    4
-                                ],
+                                "range": null,
                                 "title": "Number of sensors",
                                 "type": "int"
                             },
@@ -34646,6 +34640,26 @@
                         "name": "FEATURE_SECURITY_AUTH",
                         "range": null,
                         "title": "Enable authentication security",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": null,
+                        "id": "FEATURE_SERVICES_WIFIAP",
+                        "name": "FEATURE_SERVICES_WIFIAP",
+                        "range": null,
+                        "title": "Enable WiFi Access Point",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": null,
+                        "id": "FEATURE_SERVICES_SYSTIME",
+                        "name": "FEATURE_SERVICES_SYSTIME",
+                        "range": null,
+                        "title": "Enable system time service",
                         "type": "bool"
                     }
                 ],

@@ -5,33 +5,13 @@
 #include "aut_time.h"
 #include "io_control.h"
 #include "device_types.h"
+#include "sys_time.h"
 
 #define MAX_RULES 4
 
 static const char *TAG = "Feat_Time";
 
 static time_rule_t rules[MAX_RULES];
-static int rule_count = 0;
-
-static void fakeTime_get(int *hour, int *minute)
-{
-    static int fake_hour = 0;
-    static int fake_minute = 0;
-
-    fake_minute++;
-
-    if (fake_minute >= 60) {
-        fake_minute = 0;
-        fake_hour++;
-
-        if (fake_hour >= 24) {
-            fake_hour = 0;
-        }
-    }
-
-    *hour = fake_hour;
-    *minute = fake_minute;
-}
 
 void automationTimebased_init(void)
 {
@@ -42,7 +22,6 @@ void automationTimebased_init(void)
 void automationTimebased_addRule(int hour, int minute, int device_id, bool state)
 {
     ESP_LOGI(TAG, "Create Timerule:");
-    if (rule_count >= MAX_RULES) return;
 
     int target_type = ioControl_getType(device_id);
     if (target_type != DEVICE_TYPE_LIGHT &&
@@ -50,24 +29,60 @@ void automationTimebased_addRule(int hour, int minute, int device_id, bool state
 
     ESP_LOGI(TAG, "Device %d available", device_id);
 
-    rules[rule_count++] = (time_rule_t){hour, minute, device_id, state};
+    for (int i = 0; i < MAX_RULES; i++) {
+        if (!rules[i].active) {
+            rules[i].active = true;
+            rules[i].hour = hour;
+            rules[i].minute = minute;
+            rules[i].device_id = device_id;
+            rules[i].turn_on = state;
+            ESP_LOGI(TAG, "Timerule created at slot %d", i);
+            return;
+        }
+    }
 
-    ESP_LOGI(TAG, "Timerule Created");
+    ESP_LOGW(TAG, "No free rule slots");
+}
+
+int automationTimebased_getRuleCount(void)
+{
+    return MAX_RULES;
+}
+
+time_rule_t *automationTimebased_getRule(int index)
+{
+    if (index < 0 || index >= MAX_RULES) {
+        return NULL;
+    }
+
+    return &rules[index];
+}
+
+void automationTimebased_removeRule(int index)
+{
+    if (index < 0 || index >= MAX_RULES) {
+        return;
+    }
+
+    rules[index].active = false;
+    ESP_LOGI(TAG, "Rule %d removed", index);
 }
 
 void automationTimebased_process(void)
 {
-    int hour, minute;
-    fakeTime_get(&hour, &minute);
+    system_time_t time = systemTime_get();
 
-    for (int i = 0; i < rule_count; i++) {
-        if (rules[i].hour == hour &&
-            rules[i].minute == minute) {
+    for (int i = 0; i < MAX_RULES; i++) {
+        if (!rules[i].active) {
+            continue;
+        }
+
+        if (rules[i].hour == time.hour &&
+            rules[i].minute == time.minute &&
+            time.second == 0) {
 
             ioControl_setDevice(rules[i].device_id, rules[i].turn_on);
             ESP_LOGI(TAG, "Timerule %d triggered", i);
         }
     }
-
-    vTaskDelay(pdMS_TO_TICKS(1000));
 }

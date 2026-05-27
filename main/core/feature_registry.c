@@ -45,9 +45,26 @@
 #include "sec_auth.h"
 #endif
 
+#if CONFIG_FEATURE_SERVICES_WIFIAP
+#include "wifi_ap.h"
+#endif
+
+#if CONFIG_FEATURE_SERVICES_SYSTIME
+#include "sys_time.h"
+#endif
+
 
 void featureRegistry_Init(void)
 {
+
+#if CONFIG_FEATURE_SERVICES_WIFIAP
+    wifiAp_init();
+#endif
+
+#if CONFIG_FEATURE_SERVICES_SYSTIME
+    systemTime_init();
+#endif
+
 #if CONFIG_FEATURE_DEVICE_LIGHT
     lightDevice_init();
 #endif
@@ -95,6 +112,10 @@ void featureRegistry_Init(void)
 
 void featureRegistry_Process(void)
 {
+#if CONFIG_FEATURE_SERVICES_SYSTIME
+    systemTime_process();
+#endif
+
 #if CONFIG_FEATURE_AUTOMATION_NONE
     automationNone_process();
 #endif

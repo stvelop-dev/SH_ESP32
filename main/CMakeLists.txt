@@ -11,6 +11,7 @@ set(INCLUDE_DIRS
     "include/features/interface"
     "include/features/device"
     "include/features/security"
+    "include/features/services"
 )
 
 if(CONFIG_FEATURE_AUTOMATION_NONE)
@@ -55,6 +56,14 @@ endif()
 
 if(CONFIG_FEATURE_SECURITY_AUTH)
     list(APPEND SRC_FILES "features/security/sec_auth.c")
+endif()
+
+if(CONFIG_FEATURE_SERVICES_WIFIAP)
+    list(APPEND SRC_FILES "features/services/wifi_ap.c")
+endif()
+
+if(CONFIG_FEATURE_SERVICES_SYSTIME)
+    list(APPEND SRC_FILES "features/services/sys_time.c")
 endif()
 
 idf_component_register(
