@@ -73,23 +73,23 @@ void featureRegistry_Init(void)
 #endif
 
 #if CONFIG_FEATURE_INTERFACE_CLI
-    cliInterface_start();
+    cliInterface_init();
 #endif
 
 #if CONFIG_FEATURE_INTERFACE_REST
-    restInterface_start();
+    restInterface_init();
 #endif
 
 #if CONFIG_FEATURE_INTERFACE_WEBUI
-    webuiIntferface_start();
+    webuiIntferface_init();
 #endif
 
 #if CONFIG_FEATURE_SECURITY_NONE
-    noneSecurity_start();
+    noneSecurity_init();
 #endif
 
 #if CONFIG_FEATURE_SECURITY_AUTH
-    authenticationSecurity_start();
+    authenticationSecurity_init();
 #endif
 }
 

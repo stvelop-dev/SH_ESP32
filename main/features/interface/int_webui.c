@@ -1,5 +1,5 @@
 #include "int_webui.h"
 
-void webuiInterface_start(void) {
+void webuiInterface_init(void) {
 
 }

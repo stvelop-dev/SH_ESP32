@@ -1,5 +1,5 @@
 #include "int_rest.h"
 
-void restInterface_start(void) {
+void restInterface_init(void) {
 
 }

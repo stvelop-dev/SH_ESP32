@@ -1,3 +1,3 @@
 #pragma once
 
-void webuiInterface_start(void)
+void webuiInterface_init(void)

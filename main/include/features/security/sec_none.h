@@ -1,3 +1,3 @@
 #pragma once
 
-void noneSecurity_start(void);
+void noneSecurity_init(void);

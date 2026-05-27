@@ -1,3 +1,3 @@
 #pragma once
 
-void cliInterface_start(void);
+void cliInterface_init(void);

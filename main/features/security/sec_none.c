@@ -1,5 +1,5 @@
 #include "sec_none.h"
 
-void noneSecurity_start(void) {
+void noneSecurity_init(void) {
 
 }

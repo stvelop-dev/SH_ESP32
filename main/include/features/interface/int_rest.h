@@ -1,3 +1,3 @@
 #pragma once
 
-void restInterface_start(void);
+void restInterface_init(void);

@@ -1,3 +1,3 @@
 #pragma once
 
-void authenticationSecurity_start(void);
+void authenticationSecurity_init(void);
