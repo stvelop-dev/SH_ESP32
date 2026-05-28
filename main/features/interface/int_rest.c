@@ -13,6 +13,48 @@ static const char *TAG = "Feat_Rest";
 
 static httpd_handle_t server = NULL;
 
+static esp_err_t restHandler_help(httpd_req_t *req)
+{
+    const char *html =
+        "<!DOCTYPE html>"
+        "<html>"
+        "<head>"
+        "<title>ESP32 SmartHome REST Help</title>"
+        "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+        "</head>"
+        "<body>"
+        "<h1>ESP32 SmartHome REST API</h1>"
+
+        "<h2>Device Control</h2>"
+        "<ul>"
+        "<li><a href=\"/list\">/list</a> - List all devices</li>"
+        "<li>/on?id=0 - Turn device on</li>"
+        "<li>/off?id=0 - Turn device off</li>"
+        "<li>/bright?id=0&value=80 - Set brightness</li>"
+        "</ul>"
+
+        "<h2>Time</h2>"
+        "<ul>"
+        "<li><a href=\"/time/get\">/time/get</a> - Show current system time</li>"
+        "<li>/time/set?hour=18&minute=30&second=0 - Set system time</li>"
+        "</ul>"
+
+        "<h2>Schedules</h2>"
+        "<ul>"
+        "<li><a href=\"/schedule/list\">/schedule/list</a> - List time rules</li>"
+        "<li>/schedule/add?hour=18&minute=30&id=0&state=1 - Add time rule</li>"
+        "<li>/schedule/remove?index=0 - Remove time rule</li>"
+        "</ul>"
+
+        "</body>"
+        "</html>";
+
+    httpd_resp_set_type(req, "text/html");
+    httpd_resp_send(req, html, HTTPD_RESP_USE_STRLEN);
+
+    return ESP_OK;
+}
+
 static esp_err_t restHandler_on(httpd_req_t *req)
 {
     char query[64];
@@ -119,7 +161,7 @@ static esp_err_t restHandler_list(httpd_req_t *req)
     char response[512];
     int offset = 0;
 
-    offset += snprintf(response + offset, sizeof(response) - offset, "Devices:\n");
+    offset += snprintf(response + offset, sizeof(response) - offset, "Devices:<br>\n");
 
     int count = deviceManager_getCount();
 
@@ -127,7 +169,7 @@ static esp_err_t restHandler_list(httpd_req_t *req)
         device_t *dev = deviceManager_getId(i);
 
         if (dev) {
-            offset += snprintf(response + offset, sizeof(response) - offset, "ID:%d Name:%s On:%d Bright:%d\n",
+            offset += snprintf(response + offset, sizeof(response) - offset, "ID:%d Name:%s On:%d Bright:%d<br>\n",
                                dev->id, dev->name, dev->is_on, dev->brightness);
         }
     }
@@ -141,7 +183,7 @@ static esp_err_t restHandler_scheduleList(httpd_req_t *req)
     char response[512];
     int offset = 0;
 
-    offset += snprintf(response + offset, sizeof(response) - offset, "Time Rules:\n");
+    offset += snprintf(response + offset, sizeof(response) - offset, "Time Rules:<br>\n");
 
     int count = automationTimebased_getRuleCount();
 
@@ -155,7 +197,7 @@ static esp_err_t restHandler_scheduleList(httpd_req_t *req)
         if (!rule->active) {
             continue;
         }
-        offset += snprintf(response + offset, sizeof(response) - offset, "Rule %d -> %02d:%02d Device:%d State:%d\n",
+        offset += snprintf(response + offset, sizeof(response) - offset, "Rule %d -> %02d:%02d Device:%d State:%d<br>\n",
                            i, rule->hour, rule->minute, rule->device_id, rule->turn_on);
     }
 
@@ -226,17 +268,17 @@ static esp_err_t restHandler_timeGet(httpd_req_t *req)
 
     system_time_t time = systemTime_get();
 
-    snprintf(response,
-             sizeof(response),
-             "%02d:%02d:%02d",
-             time.hour,
-             time.minute,
-             time.second);
+    snprintf(response, sizeof(response), "%02d:%02d:%02d", time.hour, time.minute, time.second);
 
-    httpd_resp_send(req,
-                    response,
-                    HTTPD_RESP_USE_STRLEN);
+    httpd_resp_send(req, response, HTTPD_RESP_USE_STRLEN);
 
+    return ESP_OK;
+}
+
+static esp_err_t restHandler_favicon(httpd_req_t *req)
+{
+    httpd_resp_set_status(req, "204 No Content");
+    httpd_resp_send(req, NULL, 0);
     return ESP_OK;
 }
 
@@ -251,6 +293,13 @@ void restInterface_init(void)
         ESP_LOGE(TAG, "Failed to start REST interface");
         return;
     }
+
+    httpd_uri_t help_uri = {
+        .uri = "/",
+        .method = HTTP_GET,
+        .handler = restHandler_help,
+        .user_ctx = NULL
+    };
 
     httpd_uri_t on_uri = {
         .uri = "/on",
@@ -315,6 +364,14 @@ httpd_uri_t time_get_uri = {
     .user_ctx = NULL
 };
 
+httpd_uri_t favicon_uri = {
+    .uri = "/favicon.ico",
+    .method = HTTP_GET,
+    .handler = restHandler_favicon,
+    .user_ctx = NULL
+};
+
+    httpd_register_uri_handler(server, &help_uri);
     httpd_register_uri_handler(server, &on_uri);
     httpd_register_uri_handler(server, &off_uri);
     httpd_register_uri_handler(server, &bright_uri);
@@ -324,6 +381,7 @@ httpd_uri_t time_get_uri = {
     httpd_register_uri_handler(server, &schedule_remove_uri);
     httpd_register_uri_handler(server, &time_set_uri);
     httpd_register_uri_handler(server, &time_get_uri);
+    httpd_register_uri_handler(server, &favicon_uri);
 
     ESP_LOGI(TAG, "REST interface started");
 }
