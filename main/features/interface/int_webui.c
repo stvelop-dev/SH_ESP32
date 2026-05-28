@@ -22,7 +22,7 @@ static esp_err_t webuiHandler_getRoot(httpd_req_t *req)
                 "<div class='content'>"
                     "<div class='box'>"
                         "<h1 id='title'>ESP32 SmartHome</h1>"
-                        "<div id='content'>Bitte Menue auswaehlen.</div>"
+                        "<div id='content'>Please select in menu.</div>"
                     "</div>"
                 "</div>"
             "</div>"
@@ -70,7 +70,7 @@ static esp_err_t webuiHandler_getStatus(httpd_req_t *req)
                 "<input id='second' type='number' min='0' max='59' placeholder='Sekunde'>"
             "</div>"
 
-            "<button class='action' onclick='setTime()'>Zeit setzen</button>"
+            "<button class='action' onclick='setTime()'>Set time</button>"
             "<pre id='result' class='result'></pre>"
         "</div>";
 
@@ -103,6 +103,43 @@ static esp_err_t webuiHandler_getDevices(httpd_req_t *req)
             "</div>"
             "<button class='action' onclick='setBrightness()'>Set Brightness</button>"
 
+            "<pre id='result' class='result'></pre>"
+        "</div>";
+
+    httpd_resp_set_type(req, "text/html");
+    httpd_resp_send(req, html, HTTPD_RESP_USE_STRLEN);
+
+    return ESP_OK;
+}
+
+static esp_err_t webuiHandler_getTimebased(httpd_req_t *req)
+{
+    const char *html =
+        "<div class='status-card'>"
+            "<h2>Timebased Automation</h2>"
+            "<div id='scheduleList'></div>"
+        "</div>"
+
+        "<div class='status-card'>"
+            "<h3>Add rule</h3>"
+            "<div class='form-row'>"
+                "<input id='ruleHour' type='number' min='0' max='23' placeholder='Stunde'>"
+                "<input id='ruleMinute' type='number' min='0' max='59' placeholder='Minute'>"
+                "<input id='ruleDeviceId' type='number' min='0' placeholder='Device ID'>"
+                "<select id='ruleState'>"
+                    "<option value='1'>ON</option>"
+                    "<option value='0'>OFF</option>"
+                "</select>"
+            "</div>"
+            "<button class='action' onclick='addSchedule()'>Add rule</button>"
+        "</div>"
+
+        "<div class='status-card'>"
+            "<h3>Remove rule</h3>"
+            "<div class='form-row'>"
+                "<input id='ruleIndex' type='number' min='0' placeholder='Index'>"
+            "</div>"
+            "<button class='action' onclick='removeSchedule()'>Remove rule</button>"
             "<pre id='result' class='result'></pre>"
         "</div>";
 
@@ -162,6 +199,10 @@ static esp_err_t webuiHandler_getScript(httpd_req_t *req)
 
                 "if(url=='/webui/devices'){"
                     "loadDevices();"
+                "}"
+
+                "if(url=='/webui/time'){"
+                    "loadSchedules();"
                 "}"
             "});"
         "}"
@@ -271,6 +312,38 @@ static esp_err_t webuiHandler_getScript(httpd_req_t *req)
                 "document.getElementById('result').innerText=t;"
                 "loadDevices();"
             "});"
+        "}"
+        
+        //timebased
+        "function loadSchedules(){"
+            "fetch('/schedule/list').then(r=>r.text())"
+            ".then(t=>{"
+                "t=t.replace('Time Rules:','');"
+                "document.getElementById('scheduleList').innerHTML=t;"
+            "});"
+        "}"
+
+        "function addSchedule(){"
+            "let h=document.getElementById('ruleHour').value;"
+            "let m=document.getElementById('ruleMinute').value;"
+            "let id=document.getElementById('ruleDeviceId').value;"
+            "let state=document.getElementById('ruleState').value;"
+
+            "fetch('/schedule/add?hour='+h+'&minute='+m+'&id='+id+'&state='+state).then(r=>r.text())"
+            ".then(t=>{"
+                "document.getElementById('result').innerText=t;"
+                "loadSchedules();"
+            "});"
+        "}"
+
+        "function removeSchedule(){"
+            "let index=document.getElementById('ruleIndex').value;"
+
+            "fetch('/schedule/remove?index='+index).then(r=>r.text())"
+            ".then(t=>{"
+                "document.getElementById('result').innerText=t;"
+                "loadSchedules();"
+            "});"
         "}";
 
     httpd_resp_set_type(req, "application/javascript");
@@ -310,6 +383,12 @@ void webuiInterface_init(httpd_handle_t server)
         .handler = webuiHandler_getDevices
     };
 
+    httpd_uri_t timebased_uri = {
+    .uri = "/webui/time",
+    .method = HTTP_GET,
+    .handler = webuiHandler_getTimebased
+    };
+
     httpd_uri_t css_uri = {
         .uri = "/webui/style.css",
         .method = HTTP_GET,
@@ -326,6 +405,7 @@ void webuiInterface_init(httpd_handle_t server)
     httpd_register_uri_handler(server, &menu_uri);
     httpd_register_uri_handler(server, &status_uri);
     httpd_register_uri_handler(server, &devices_uri);
+    httpd_register_uri_handler(server, &timebased_uri);
     httpd_register_uri_handler(server, &css_uri);
     httpd_register_uri_handler(server, &script_uri);
 

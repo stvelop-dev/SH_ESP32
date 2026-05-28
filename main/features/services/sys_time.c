@@ -6,7 +6,7 @@
 
 static const char *TAG = "Serv_SysTime";
 
-static system_time_t current_time;
+static systemTime_t current_time;
 
 
 void systemTime_init(void)
@@ -53,7 +53,7 @@ void systemTime_set(int hour, int minute, int second)
     ESP_LOGI(TAG, "System time updated");
 }
 
-system_time_t systemTime_get(void)
+systemTime_t systemTime_get(void)
 {
     return current_time;
 }

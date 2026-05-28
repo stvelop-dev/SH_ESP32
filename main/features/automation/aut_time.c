@@ -11,7 +11,7 @@
 
 static const char *TAG = "Feat_Time";
 
-static time_rule_t rules[MAX_RULES];
+static timeRule_t rules[MAX_RULES];
 
 void automationTimebased_init(void)
 {
@@ -19,13 +19,24 @@ void automationTimebased_init(void)
     //automationTimebased_addRule(0, 10, 0, false);
 }
 
-void automationTimebased_addRule(int hour, int minute, int device_id, bool state)
+timeRule_addResult_t automationTimebased_addRule(int hour, int minute, int device_id, bool state)
 {
     ESP_LOGI(TAG, "Create Timerule:");
 
+    if (hour < 0 || hour > 23 || minute < 0 || minute > 59) {
+        return TIMERULE_ADD_ERRORINVALIDTIME;
+    }
+
     int target_type = ioControl_getType(device_id);
+
+    if (target_type < 0) {
+        return TIMERULE_ADD_ERRORINVALIDDEVICE;
+    }
+
     if (target_type != DEVICE_TYPE_LIGHT &&
-        target_type != DEVICE_TYPE_RELAY) return;
+        target_type != DEVICE_TYPE_RELAY) {
+            return TIMERULE_ADD_ERRORNOTSWITCHABLE;
+        }
 
     ESP_LOGI(TAG, "Device %d available", device_id);
 
@@ -37,11 +48,12 @@ void automationTimebased_addRule(int hour, int minute, int device_id, bool state
             rules[i].device_id = device_id;
             rules[i].turn_on = state;
             ESP_LOGI(TAG, "Timerule created at slot %d", i);
-            return;
+            return TIMERULE_ADD_OK;
         }
     }
 
     ESP_LOGW(TAG, "No free rule slots");
+    return TIMERULE_ADD_ERRORNOSLOT;
 }
 
 int automationTimebased_getRuleCount(void)
@@ -49,7 +61,7 @@ int automationTimebased_getRuleCount(void)
     return MAX_RULES;
 }
 
-time_rule_t *automationTimebased_getRule(int index)
+timeRule_t *automationTimebased_getRule(int index)
 {
     if (index < 0 || index >= MAX_RULES) {
         return NULL;
@@ -58,19 +70,24 @@ time_rule_t *automationTimebased_getRule(int index)
     return &rules[index];
 }
 
-void automationTimebased_removeRule(int index)
+timeRule_removeResult_t automationTimebased_removeRule(int index)
 {
     if (index < 0 || index >= MAX_RULES) {
-        return;
+        return TIMERULE_REMOVE_ERRORINVALIDINDEX;
+    }
+
+    if (!rules[index].active) {
+        return TIMERULE_REMOVE_ERRORNOTACTIVE;
     }
 
     rules[index].active = false;
     ESP_LOGI(TAG, "Rule %d removed", index);
+    return TIMERULE_REMOVE_OK;
 }
 
 void automationTimebased_process(void)
 {
-    system_time_t time = systemTime_get();
+    systemTime_t time = systemTime_get();
 
     for (int i = 0; i < MAX_RULES; i++) {
         if (!rules[i].active) {
