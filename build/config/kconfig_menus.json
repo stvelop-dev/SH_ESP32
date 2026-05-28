@@ -34507,23 +34507,24 @@
                         "type": "bool"
                     },
                     {
-                        "children": [],
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "FEATURE_INTERFACE_REST",
+                                "help": null,
+                                "id": "FEATURE_INTERFACE_WEBUI",
+                                "name": "FEATURE_INTERFACE_WEBUI",
+                                "range": null,
+                                "title": "Enable WebUI interface",
+                                "type": "bool"
+                            }
+                        ],
                         "depends_on": "FEATURE_SERVICES_WIFIAP",
                         "help": null,
                         "id": "FEATURE_INTERFACE_REST",
                         "name": "FEATURE_INTERFACE_REST",
                         "range": null,
                         "title": "Enable REST interface",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "FEATURE_SERVICES_WIFIAP",
-                        "help": null,
-                        "id": "FEATURE_INTERFACE_WEBUI",
-                        "name": "FEATURE_INTERFACE_WEBUI",
-                        "range": null,
-                        "title": "Enable WebUI interface",
                         "type": "bool"
                     },
                     {
@@ -34568,7 +34569,10 @@
                                 "help": null,
                                 "id": "RELAY_COUNT",
                                 "name": "RELAY_COUNT",
-                                "range": null,
+                                "range": [
+                                    0,
+                                    4
+                                ],
                                 "title": "Number of relays",
                                 "type": "int"
                             },
@@ -34599,7 +34603,10 @@
                                 "help": null,
                                 "id": "SENSOR_COUNT",
                                 "name": "SENSOR_COUNT",
-                                "range": null,
+                                "range": [
+                                    0,
+                                    4
+                                ],
                                 "title": "Number of sensors",
                                 "type": "int"
                             },

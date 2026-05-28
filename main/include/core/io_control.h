@@ -2,10 +2,15 @@
 
 #include "device_types.h"
 
+typedef enum {
+    IOCONTROL_OK,
+    IOCONTROL_ERRORNOTFOUND,
+    IOCONTROL_ERRORNOTSWITCHABLE
+} ioControl_result_t;
+
 void ioControl_init(void);
 
-void ioControl_setDevice(int device_id, bool state);
-void ioControl_toggleDevice(int device_id);
+ioControl_result_t ioControl_setDevice(int device_id, bool state);
 void ioControl_setBrightness(int device_id, int brightness);
 
 int ioControl_getValue(int id);

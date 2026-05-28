@@ -21,10 +21,6 @@
 #include "int_rest.h"
 #endif
 
-#if CONFIG_FEATURE_INTERFACE_WEBUI
-#include "int_webUI.h"
-#endif
-
 #if CONFIG_FEATURE_DEVICE_LIGHT
 #include "dev_light.h"
 #endif
@@ -95,10 +91,6 @@ void featureRegistry_Init(void)
 
 #if CONFIG_FEATURE_INTERFACE_REST
     restInterface_init();
-#endif
-
-#if CONFIG_FEATURE_INTERFACE_WEBUI
-    webuiIntferface_init();
 #endif
 
 #if CONFIG_FEATURE_SECURITY_NONE

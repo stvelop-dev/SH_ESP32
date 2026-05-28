@@ -4,10 +4,15 @@
 #include "esp_http_server.h"
 
 #include "int_rest.h"
+#include "sdkconfig.h"
 #include "io_control.h"
 #include "device_manager.h"
 #include "aut_time.h"
 #include "sys_time.h"
+
+#if CONFIG_FEATURE_INTERFACE_WEBUI
+#include "int_webui.h"
+#endif
 
 static const char *TAG = "Feat_Rest";
 
@@ -67,7 +72,17 @@ static esp_err_t restHandler_on(httpd_req_t *req)
         device_t *dev = deviceManager_getId(id);
 
         if (dev) {
-            ioControl_setDevice(dev->id, true);
+            ioControl_result_t result = ioControl_setDevice(dev->id, true);
+            if (result == IOCONTROL_ERRORNOTFOUND) {
+                httpd_resp_sendstr(req, "Device not found");
+                return ESP_OK;
+            }
+
+            if (result == IOCONTROL_ERRORNOTSWITCHABLE) {
+                httpd_resp_sendstr(req, "Device is not switchable");
+                return ESP_OK;
+            }
+
             httpd_resp_sendstr(req, "OK: device on");
             return ESP_OK;
         }
@@ -89,7 +104,16 @@ static esp_err_t restHandler_off(httpd_req_t *req)
         device_t *dev = deviceManager_getId(id);
 
         if (dev) {
-            ioControl_setDevice(dev->id, false);
+            ioControl_result_t result = ioControl_setDevice(dev->id, false);
+            if (result == IOCONTROL_ERRORNOTFOUND) {
+                httpd_resp_sendstr(req, "Device not found");
+                return ESP_OK;
+            }
+
+            if (result == IOCONTROL_ERRORNOTSWITCHABLE) {
+                httpd_resp_sendstr(req, "Device is not switchable");
+                return ESP_OK;
+            }
             httpd_resp_sendstr(req, "OK: device off");
             return ESP_OK;
         }
@@ -285,9 +309,11 @@ static esp_err_t restHandler_favicon(httpd_req_t *req)
 void restInterface_init(void)
 {
     httpd_config_t config = HTTPD_DEFAULT_CONFIG();
-    config.max_uri_handlers = 16;
-
-    ESP_LOGI(TAG, "Starting REST interface");
+    #if CONFIG_FEATURE_INTERFACE_WEBUI
+        config.max_uri_handlers = 32;
+    #else
+        config.max_uri_handlers = 16;
+    #endif
 
     if (httpd_start(&server, &config) != ESP_OK) {
         ESP_LOGE(TAG, "Failed to start REST interface");
@@ -295,7 +321,7 @@ void restInterface_init(void)
     }
 
     httpd_uri_t help_uri = {
-        .uri = "/",
+        .uri = "/help",
         .method = HTTP_GET,
         .handler = restHandler_help,
         .user_ctx = NULL
@@ -384,4 +410,9 @@ httpd_uri_t favicon_uri = {
     httpd_register_uri_handler(server, &favicon_uri);
 
     ESP_LOGI(TAG, "REST interface started");
+
+    #if CONFIG_FEATURE_INTERFACE_WEBUI
+        webuiInterface_init(server);
+    #endif
+
 }

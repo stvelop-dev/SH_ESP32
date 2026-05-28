@@ -25,7 +25,7 @@ config FEATURE_INTERFACE_REST
 config FEATURE_INTERFACE_WEBUI
     bool "Enable WebUI interface"
     default n
-    depends on FEATURE_SERVICES_WIFIAP
+    depends on FEATURE_INTERFACE_REST
 
 config FEATURE_DEVICE_LIGHT
     bool "Enable light device"

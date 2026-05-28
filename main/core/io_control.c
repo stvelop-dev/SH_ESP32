@@ -32,15 +32,21 @@ int ioControl_getValue(int id)
     return deviceManager_getValue(dev);
 }
 
-void ioControl_setDevice(int device_id, bool state)
+ioControl_result_t ioControl_setDevice(int device_id, bool state)
 {
     device_t *device = deviceManager_getId(device_id);
 
     if (device == NULL) {
-        return;
+        return IOCONTROL_ERRORNOTFOUND;
+    }
+
+    if (device->type == DEVICE_TYPE_SENSOR) {
+        return IOCONTROL_ERRORNOTSWITCHABLE;
     }
 
     deviceManager_setOn(device, state);
+
+    return IOCONTROL_OK;
 }
 
 void ioControl_setBrightness(int device_id, int brightness)
