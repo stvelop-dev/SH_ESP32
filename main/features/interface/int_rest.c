@@ -8,6 +8,7 @@
 #include "io_control.h"
 #include "device_manager.h"
 #include "aut_time.h"
+#include "aut_event.h"
 #include "sys_time.h"
 
 #if CONFIG_FEATURE_INTERFACE_WEBUI
@@ -278,6 +279,114 @@ static esp_err_t restHandler_scheduleRemove(httpd_req_t *req)
     return ESP_FAIL;
 }
 
+static esp_err_t restHandler_eventList(httpd_req_t *req)
+{
+    char response[512];
+    int offset = 0;
+
+    offset += snprintf(response + offset, sizeof(response) - offset, "Eventrules:<br>\n");
+
+    int count = automationEventbased_getRuleCount();
+
+    for (int i = 0; i < count; i++) {
+        eventRule_t *rule = automationEventbased_getRule(i);
+
+        if (rule && rule->active) {
+            offset += snprintf(response + offset, sizeof(response) - offset, "Index:%d Sensor:%d Trigger:%d Target:%d State:%d<br>\n",
+                               i, rule->sensor_id, rule->trigger_state, rule->target_device_id, rule->target_state);
+        }
+    }
+
+    httpd_resp_set_type(req, "text/html");
+    httpd_resp_send(req, response, HTTPD_RESP_USE_STRLEN);
+
+    return ESP_OK;
+}
+
+static esp_err_t restHandler_eventAdd(httpd_req_t *req)
+{
+    char query[128];
+
+    int sensor = -1;
+    int target = -1;
+    int trigger = -1;
+    int state = -1;
+
+    if (httpd_req_get_url_query_str(req, query, sizeof(query)) == ESP_OK) {
+        char value[16];
+
+        if (httpd_query_key_value(query, "sensor", value, sizeof(value)) == ESP_OK) {
+            sensor = atoi(value);
+        }
+
+        if (httpd_query_key_value(query, "target", value, sizeof(value)) == ESP_OK) {
+            target = atoi(value);
+        }
+
+        if (httpd_query_key_value(query, "trigger", value, sizeof(value)) == ESP_OK) {
+            trigger = atoi(value);
+        }
+
+        if (httpd_query_key_value(query, "state", value, sizeof(value)) == ESP_OK) {
+            state = atoi(value);
+        }
+    }
+
+    eventRule_addResult_t result = automationEventbased_addRule(sensor, target, trigger, state);
+
+    if (result == EVENTRULE_ADD_ERRORNOSLOT) {
+        httpd_resp_sendstr(req, "ERROR: no free eventrule slot");
+        return ESP_OK;
+    }
+
+    if (result == EVENTRULE_ADD_ERRORINVALIDSENSOR) {
+        httpd_resp_sendstr(req, "ERROR: invalid sensor");
+        return ESP_OK;
+    }
+
+    if (result == EVENTRULE_ADD_ERRORINVALIDTARGET) {
+        httpd_resp_sendstr(req, "ERROR: invalid target device");
+        return ESP_OK;
+    }
+
+    if (result == EVENTRULE_ADD_ERRORTARGETNOTSWITCHABLE) {
+        httpd_resp_sendstr(req, "ERROR: target is not switchable");
+        return ESP_OK;
+    }
+
+    httpd_resp_sendstr(req, "OK: eventrule created");
+    return ESP_OK;
+}
+
+static esp_err_t restHandler_eventRemove(httpd_req_t *req)
+{
+    char query[64];
+    int index = -1;
+
+    if (httpd_req_get_url_query_str(req, query, sizeof(query)) == ESP_OK) {
+        char value[16];
+
+        if (httpd_query_key_value(query, "index", value, sizeof(value)) == ESP_OK) {
+            index = atoi(value);
+        }
+    }
+
+    eventRule_removeResult_t result = automationEventbased_removeRule(index);
+
+    if (result == EVENTRULE_REMOVE_ERRORINVALIDINDEX) {
+        httpd_resp_sendstr(req, "ERROR: invalid eventrule index");
+        return ESP_OK;
+    }
+
+    if (result == EVENTRULE_REMOVE_ERRORNOTACTIVE) {
+        httpd_resp_sendstr(req, "ERROR: eventrule not active");
+        return ESP_OK;
+    }
+
+    httpd_resp_sendstr(req, "OK: eventrule removed");
+    return ESP_OK;
+}
+
 static esp_err_t restHandler_timeSet(httpd_req_t *req)
 {
     char query[128];
@@ -400,6 +509,24 @@ void restInterface_init(void)
         .user_ctx = NULL
     };
 
+    httpd_uri_t event_list_uri = {
+        .uri = "/event/list",
+        .method = HTTP_GET,
+        .handler = restHandler_eventList
+    };
+
+    httpd_uri_t event_add_uri = {
+        .uri = "/event/add",
+        .method = HTTP_GET,
+        .handler = restHandler_eventAdd
+    };
+
+    httpd_uri_t event_remove_uri = {
+        .uri = "/event/remove",
+        .method = HTTP_GET,
+        .handler = restHandler_eventRemove
+    };
+
     httpd_uri_t time_set_uri = {
         .uri = "/time/set",
         .method = HTTP_GET,
@@ -429,6 +556,9 @@ void restInterface_init(void)
     httpd_register_uri_handler(server, &schedule_list_uri);
     httpd_register_uri_handler(server, &schedule_add_uri);
     httpd_register_uri_handler(server, &schedule_remove_uri);
+    httpd_register_uri_handler(server, &event_list_uri);
+    httpd_register_uri_handler(server, &event_add_uri);
+    httpd_register_uri_handler(server, &event_remove_uri);
     httpd_register_uri_handler(server, &time_set_uri);
     httpd_register_uri_handler(server, &time_get_uri);
     httpd_register_uri_handler(server, &favicon_uri);

@@ -125,7 +125,7 @@ static esp_err_t webuiHandler_getTimebased(httpd_req_t *req)
             "<div class='form-row'>"
                 "<input id='ruleHour' type='number' min='0' max='23' placeholder='Stunde'>"
                 "<input id='ruleMinute' type='number' min='0' max='59' placeholder='Minute'>"
-                "<input id='ruleDeviceId' type='number' min='0' placeholder='Device ID'>"
+                "<input id='ruleDeviceId' type='number' min='0' placeholder='Device ID'><br><br>"
                 "<select id='ruleState'>"
                     "<option value='1'>ON</option>"
                     "<option value='0'>OFF</option>"
@@ -140,6 +140,46 @@ static esp_err_t webuiHandler_getTimebased(httpd_req_t *req)
                 "<input id='ruleIndex' type='number' min='0' placeholder='Index'>"
             "</div>"
             "<button class='action' onclick='removeSchedule()'>Remove rule</button>"
+            "<pre id='result' class='result'></pre>"
+        "</div>";
+
+    httpd_resp_set_type(req, "text/html");
+    httpd_resp_send(req, html, HTTPD_RESP_USE_STRLEN);
+
+    return ESP_OK;
+}
+
+static esp_err_t webuiHandler_getEventbased(httpd_req_t *req)
+{
+    const char *html =
+        "<div class='status-card'>"
+            "<h2>Eventbased Automation</h2>"
+            "<div id='eventRuleList'></div>"
+        "</div>"
+
+        "<div class='status-card'>"
+            "<h3>Eventregel hinzufuegen</h3>"
+            "<div class='form-row'>"
+                "<input id='eventSensorId' type='number' min='0' placeholder='Sensor ID'>"
+                "<input id='eventTargetId' type='number' min='0' placeholder='Target ID'><br><br>"
+                "<select id='eventTriggerState'>"
+                    "<option value='1'>Trigger ON</option>"
+                    "<option value='0'>Trigger OFF</option>"
+                "</select>"
+                "<select id='eventTargetState'>"
+                    "<option value='1'>Target ON</option>"
+                    "<option value='0'>Target OFF</option>"
+                "</select>"
+            "</div>"
+            "<button class='action' onclick='addEventRule()'>Add evenrule</button>"
+        "</div>"
+
+        "<div class='status-card'>"
+            "<h3>Eventregel entfernen</h3>"
+            "<div class='form-row'>"
+                "<input id='eventRuleIndex' type='number' min='0' placeholder='Index'>"
+            "</div>"
+            "<button class='action' onclick='removeEventRule()'>Remove eventrule</button>"
             "<pre id='result' class='result'></pre>"
         "</div>";
 
@@ -203,6 +243,10 @@ static esp_err_t webuiHandler_getScript(httpd_req_t *req)
 
                 "if(url=='/webui/time'){"
                     "loadSchedules();"
+                "}"
+
+                "if(url=='/webui/events'){"
+                    "loadEventRules();"
                 "}"
             "});"
         "}"
@@ -318,7 +362,7 @@ static esp_err_t webuiHandler_getScript(httpd_req_t *req)
         "function loadSchedules(){"
             "fetch('/schedule/list').then(r=>r.text())"
             ".then(t=>{"
-                "t=t.replace('Time Rules:','');"
+            "t=t.replace('Time Rules:','');"
                 "document.getElementById('scheduleList').innerHTML=t;"
             "});"
         "}"
@@ -343,6 +387,40 @@ static esp_err_t webuiHandler_getScript(httpd_req_t *req)
             ".then(t=>{"
                 "document.getElementById('result').innerText=t;"
                 "loadSchedules();"
+            "});"
+        "}"
+        
+
+        //eventbased
+        "function loadEventRules(){"
+            "fetch('/event/list').then(r=>r.text())"
+            ".then(t=>{"
+                "t=t.replace('Eventrules:','');"
+                "document.getElementById('eventRuleList').innerHTML=t;"
+            "});"
+        "}"
+
+        "function addEventRule(){"
+            "let sensor=document.getElementById('eventSensorId').value;"
+            "let target=document.getElementById('eventTargetId').value;"
+            "let trigger=document.getElementById('eventTriggerState').value;"
+            "let state=document.getElementById('eventTargetState').value;"
+
+            "fetch('/event/add?sensor='+sensor+'&target='+target+'&trigger='+trigger+'&state='+state)"
+            ".then(r=>r.text())"
+            ".then(t=>{"
+                "document.getElementById('result').innerText=t;"
+                "loadEventRules();"
+            "});"
+        "}"
+
+        "function removeEventRule(){"
+            "let index=document.getElementById('eventRuleIndex').value;"
+
+            "fetch('/event/remove?index='+index).then(r=>r.text())"
+            ".then(t=>{"
+                "document.getElementById('result').innerText=t;"
+                "loadEventRules();"
             "});"
         "}";
 
@@ -389,6 +467,12 @@ void webuiInterface_init(httpd_handle_t server)
     .handler = webuiHandler_getTimebased
     };
 
+    httpd_uri_t events_uri = {
+        .uri = "/webui/events",
+        .method = HTTP_GET,
+        .handler = webuiHandler_getEventbased
+    };
+
     httpd_uri_t css_uri = {
         .uri = "/webui/style.css",
         .method = HTTP_GET,
@@ -406,6 +490,7 @@ void webuiInterface_init(httpd_handle_t server)
     httpd_register_uri_handler(server, &status_uri);
     httpd_register_uri_handler(server, &devices_uri);
     httpd_register_uri_handler(server, &timebased_uri);
+    httpd_register_uri_handler(server, &events_uri);
     httpd_register_uri_handler(server, &css_uri);
     httpd_register_uri_handler(server, &script_uri);
 
