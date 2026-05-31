@@ -18,8 +18,8 @@ end
 
 # Load bootloader symbols
 set confirm off
-    add-symbol-file D:/Projects/Espressif/SPLE/SmartHome/build/bootloader/bootloader.elf
+    add-symbol-file D:/Projects/Espressif/Home/SmartHome/build/bootloader/bootloader.elf
 set confirm on
 
 # Load application symbols
-file D:/Projects/Espressif/SPLE/SmartHome/build/SmartHome.elf
+file D:/Projects/Espressif/Home/SmartHome/build/SmartHome.elf

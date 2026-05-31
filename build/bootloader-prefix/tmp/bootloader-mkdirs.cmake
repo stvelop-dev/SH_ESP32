@@ -10,18 +10,18 @@ if(NOT EXISTS "D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/components/bo
   file(MAKE_DIRECTORY "D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/components/bootloader/subproject")
 endif()
 file(MAKE_DIRECTORY
-  "D:/Projects/Espressif/SPLE/SmartHome/build/bootloader"
-  "D:/Projects/Espressif/SPLE/SmartHome/build/bootloader-prefix"
-  "D:/Projects/Espressif/SPLE/SmartHome/build/bootloader-prefix/tmp"
-  "D:/Projects/Espressif/SPLE/SmartHome/build/bootloader-prefix/src/bootloader-stamp"
-  "D:/Projects/Espressif/SPLE/SmartHome/build/bootloader-prefix/src"
-  "D:/Projects/Espressif/SPLE/SmartHome/build/bootloader-prefix/src/bootloader-stamp"
+  "D:/Projects/Espressif/Home/SmartHome/build/bootloader"
+  "D:/Projects/Espressif/Home/SmartHome/build/bootloader-prefix"
+  "D:/Projects/Espressif/Home/SmartHome/build/bootloader-prefix/tmp"
+  "D:/Projects/Espressif/Home/SmartHome/build/bootloader-prefix/src/bootloader-stamp"
+  "D:/Projects/Espressif/Home/SmartHome/build/bootloader-prefix/src"
+  "D:/Projects/Espressif/Home/SmartHome/build/bootloader-prefix/src/bootloader-stamp"
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "D:/Projects/Espressif/SPLE/SmartHome/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
+    file(MAKE_DIRECTORY "D:/Projects/Espressif/Home/SmartHome/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
 endforeach()
 if(cfgdir)
-  file(MAKE_DIRECTORY "D:/Projects/Espressif/SPLE/SmartHome/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
+  file(MAKE_DIRECTORY "D:/Projects/Espressif/Home/SmartHome/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
 endif()

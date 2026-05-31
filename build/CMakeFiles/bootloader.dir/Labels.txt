@@ -1,13 +1,13 @@
 # Target labels
  bootloader
 # Source files and their labels
-D:/Projects/Espressif/SPLE/SmartHome/build/CMakeFiles/bootloader
-D:/Projects/Espressif/SPLE/SmartHome/build/CMakeFiles/bootloader.rule
-D:/Projects/Espressif/SPLE/SmartHome/build/CMakeFiles/bootloader-complete.rule
-D:/Projects/Espressif/SPLE/SmartHome/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
-D:/Projects/Espressif/SPLE/SmartHome/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
-D:/Projects/Espressif/SPLE/SmartHome/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
-D:/Projects/Espressif/SPLE/SmartHome/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
-D:/Projects/Espressif/SPLE/SmartHome/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
-D:/Projects/Espressif/SPLE/SmartHome/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
-D:/Projects/Espressif/SPLE/SmartHome/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
+D:/Projects/Espressif/Home/SmartHome/build/CMakeFiles/bootloader
+D:/Projects/Espressif/Home/SmartHome/build/CMakeFiles/bootloader.rule
+D:/Projects/Espressif/Home/SmartHome/build/CMakeFiles/bootloader-complete.rule
+D:/Projects/Espressif/Home/SmartHome/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+D:/Projects/Espressif/Home/SmartHome/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+D:/Projects/Espressif/Home/SmartHome/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+D:/Projects/Espressif/Home/SmartHome/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+D:/Projects/Espressif/Home/SmartHome/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+D:/Projects/Espressif/Home/SmartHome/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+D:/Projects/Espressif/Home/SmartHome/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule

@@ -3,4 +3,4 @@
 -fno-builtin-memcpy
 -fno-builtin-memset
 -fno-builtin-bzero
-"-specs=D:/Projects/Espressif/SPLE/SmartHome/build/specs/picolibc.specs"
+"-specs=D:/Projects/Espressif/Home/SmartHome/build/specs/picolibc.specs"

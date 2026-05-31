@@ -1,31 +1,7 @@
 menu "SPL Features"
-
-config FEATURE_AUTOMATION_NONE
-    bool "Enable none automation"
+config FEATURE_INTERFACE_MQTT
+    bool "Enable MQTT interface"
     default n
-
-config FEATURE_AUTOMATION_TIME
-    bool "Enable timebased automation"
-    default n
-    depends on FEATURE_SERVICES_SYSTIME
-
-config FEATURE_AUTOMATION_EVENT
-    bool "Enable eventbased automation"
-    default n
-
-config FEATURE_INTERFACE_CLI
-    bool "Enable CLI interface"
-    default n
-
-config FEATURE_INTERFACE_REST
-    bool "Enable REST interface"
-    default n
-    depends on FEATURE_SERVICES_WIFIAP
-
-config FEATURE_INTERFACE_WEBUI
-    bool "Enable WebUI interface"
-    default n
-    depends on FEATURE_INTERFACE_REST
 
 config FEATURE_DEVICE_LIGHT
     bool "Enable light device"
@@ -71,14 +47,6 @@ config SENSOR_START_GPIO
     int "First sensor GPIO"
     default 5
     depends on FEATURE_DEVICE_SENSOR
-
-config FEATURE_SECURITY_NONE
-    bool "Enable none security"
-    default n
-
-config FEATURE_SECURITY_AUTH
-    bool "Enable authentication security"
-    default n
 
 config FEATURE_SERVICES_WIFIAP
     bool "Enable WiFi Access Point"

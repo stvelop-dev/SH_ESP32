@@ -1,2 +1,2 @@
-source D:/Projects/Espressif/SPLE/SmartHome/build/gdbinit/symbols
-source D:/Projects/Espressif/SPLE/SmartHome/build/gdbinit/connect
+source D:/Projects/Espressif/Home/SmartHome/build/gdbinit/symbols
+source D:/Projects/Espressif/Home/SmartHome/build/gdbinit/connect

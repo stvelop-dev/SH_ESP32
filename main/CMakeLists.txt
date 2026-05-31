@@ -7,35 +7,13 @@ set(SRC_FILES
 
 set(INCLUDE_DIRS
     "include/core"
-    "include/features/automation"
     "include/features/interface"
     "include/features/device"
-    "include/features/security"
     "include/features/services"
 )
 
-if(CONFIG_FEATURE_AUTOMATION_NONE)
-    list(APPEND SRC_FILES "features/automation/aut_none.c")
-endif()
-
-if(CONFIG_FEATURE_AUTOMATION_TIME)
-    list(APPEND SRC_FILES "features/automation/aut_time.c")
-endif()
-
-if(CONFIG_FEATURE_AUTOMATION_EVENT)
-    list(APPEND SRC_FILES "features/automation/aut_event.c")
-endif()
-
-if(CONFIG_FEATURE_INTERFACE_CLI)
-    list(APPEND SRC_FILES "features/interface/int_cli.c")
-endif()
-
-if(CONFIG_FEATURE_INTERFACE_REST)
-    list(APPEND SRC_FILES "features/interface/int_rest.c")
-endif()
-
-if(CONFIG_FEATURE_INTERFACE_WEBUI)
-    list(APPEND SRC_FILES "features/interface/int_webui.c")
+if(CONFIG_FEATURE_INTERFACE_MQTT)
+    list(APPEND SRC_FILES "features/interface/int_mqtt.c")
 endif()
 
 if(CONFIG_FEATURE_DEVICE_LIGHT)
@@ -48,14 +26,6 @@ endif()
 
 if(CONFIG_FEATURE_DEVICE_SENSOR)
     list(APPEND SRC_FILES "features/device/dev_sensor.c")
-endif()
-
-if(CONFIG_FEATURE_SECURITY_NONE)
-    list(APPEND SRC_FILES "features/security/sec_none.c")
-endif()
-
-if(CONFIG_FEATURE_SECURITY_AUTH)
-    list(APPEND SRC_FILES "features/security/sec_auth.c")
 endif()
 
 if(CONFIG_FEATURE_SERVICES_WIFIAP)

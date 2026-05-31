@@ -22,4 +22,4 @@ set confirm off
 set confirm on
 
 # Load application symbols
-file D:/Projects/Espressif/SPLE/SmartHome/build/bootloader/bootloader.elf
+file D:/Projects/Espressif/Home/SmartHome/build/bootloader/bootloader.elf

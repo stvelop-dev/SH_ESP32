@@ -34470,61 +34470,10 @@
                         "children": [],
                         "depends_on": null,
                         "help": null,
-                        "id": "FEATURE_AUTOMATION_NONE",
-                        "name": "FEATURE_AUTOMATION_NONE",
+                        "id": "FEATURE_INTERFACE_MQTT",
+                        "name": "FEATURE_INTERFACE_MQTT",
                         "range": null,
-                        "title": "Enable none automation",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "FEATURE_SERVICES_SYSTIME",
-                        "help": null,
-                        "id": "FEATURE_AUTOMATION_TIME",
-                        "name": "FEATURE_AUTOMATION_TIME",
-                        "range": null,
-                        "title": "Enable timebased automation",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": null,
-                        "id": "FEATURE_AUTOMATION_EVENT",
-                        "name": "FEATURE_AUTOMATION_EVENT",
-                        "range": null,
-                        "title": "Enable eventbased automation",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": null,
-                        "id": "FEATURE_INTERFACE_CLI",
-                        "name": "FEATURE_INTERFACE_CLI",
-                        "range": null,
-                        "title": "Enable CLI interface",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [
-                            {
-                                "children": [],
-                                "depends_on": "FEATURE_INTERFACE_REST",
-                                "help": null,
-                                "id": "FEATURE_INTERFACE_WEBUI",
-                                "name": "FEATURE_INTERFACE_WEBUI",
-                                "range": null,
-                                "title": "Enable WebUI interface",
-                                "type": "bool"
-                            }
-                        ],
-                        "depends_on": "FEATURE_SERVICES_WIFIAP",
-                        "help": null,
-                        "id": "FEATURE_INTERFACE_REST",
-                        "name": "FEATURE_INTERFACE_REST",
-                        "range": null,
-                        "title": "Enable REST interface",
+                        "title": "Enable MQTT interface",
                         "type": "bool"
                     },
                     {
@@ -34633,26 +34582,6 @@
                         "children": [],
                         "depends_on": null,
                         "help": null,
-                        "id": "FEATURE_SECURITY_NONE",
-                        "name": "FEATURE_SECURITY_NONE",
-                        "range": null,
-                        "title": "Enable none security",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": null,
-                        "id": "FEATURE_SECURITY_AUTH",
-                        "name": "FEATURE_SECURITY_AUTH",
-                        "range": null,
-                        "title": "Enable authentication security",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": null,
                         "id": "FEATURE_SERVICES_WIFIAP",
                         "name": "FEATURE_SERVICES_WIFIAP",
                         "range": null,
@@ -34671,7 +34600,7 @@
                     }
                 ],
                 "depends_on": null,
-                "id": "component-config-spl-features-D:-Projects-Espressif-SPLE-SmartHome-main-Kconfig-1",
+                "id": "component-config-spl-features-D:-Projects-Espressif-Home-SmartHome-main-Kconfig-1",
                 "title": "SPL Features",
                 "type": "menu"
             },
