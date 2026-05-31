@@ -1,6 +1,0 @@
--Wno-frame-address
--mlongcalls
--fno-builtin-memcpy
--fno-builtin-memset
--fno-builtin-bzero
-"-specs=D:/Projects/Espressif/Home/SH_EPS32Client/build/specs/picolibc.specs"
