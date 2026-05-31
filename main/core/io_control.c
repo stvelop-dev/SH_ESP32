@@ -3,6 +3,7 @@
 
 #include "io_control.h"
 #include "device_manager.h"
+#include "io_control.h"
 
 void ioControl_init(void)
 {
@@ -21,6 +22,11 @@ int ioControl_getType(int id)
     if (dev == NULL) return -1;
 
     return dev->type;
+}
+
+int ioControl_getDeviceCount(void)
+{
+    return deviceManager_getCount();
 }
 
 int ioControl_getValue(int id)

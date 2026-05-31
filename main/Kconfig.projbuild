@@ -7,6 +7,24 @@ config FEATURE_INTERFACE_MQTT
     default n
     select SERVICES_WIFICLIENT
 
+if FEATURE_INTERFACE_MQTT
+
+menu "Mqtt Configuration"  
+
+config FEATURE_INTERFACE_MQTT_BROKERURI
+    string "MQTT Broker URI"
+    default "mqtt://192.168.178.10"
+    depends on FEATURE_INTERFACE_MQTT
+
+config FEATURE_INTERFACE_MQTT_DEVICEID
+    string "MQTT Device ID"
+    default "esp32_example"
+    depends on FEATURE_INTERFACE_MQTT
+
+endmenu
+
+endif
+
 endmenu
 
 menu "Devices"

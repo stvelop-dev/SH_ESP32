@@ -712,8 +712,15 @@ CONFIG_PARTITION_TABLE_MD5=y
 #
 # Interfaces
 #
+CONFIG_FEATURE_INTERFACE_MQTT=y
+
+#
+# Mqtt Configuration
+#
 # default:
-# CONFIG_FEATURE_INTERFACE_MQTT is not set
+CONFIG_FEATURE_INTERFACE_MQTT_BROKERURI="mqtt://192.168.178.10"
+CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID="esp32_test"
+# end of Mqtt Configuration
 # end of Interfaces
 
 #
@@ -733,7 +740,17 @@ CONFIG_PARTITION_TABLE_MD5=y
 # default:
 # CONFIG_SERVICES_WIFIAP is not set
 # default:
-# CONFIG_SERVICES_WIFICLIENT is not set
+CONFIG_SERVICES_WIFICLIENT=y
+
+#
+# WiFi Configuration
+#
+# default:
+CONFIG_SERVICES_WIFICLIENT_SSID="Ovolus"
+# default:
+CONFIG_SERVICES_WIFICLIENT_PASSWORD="Bolzplatz.2025"
+# end of WiFi Configuration
+
 # default:
 # CONFIG_SERVICES_SYSTIME is not set
 # end of Services
@@ -3269,6 +3286,33 @@ CONFIG_WL_SECTOR_SIZE_4096=y
 # default:
 CONFIG_WL_SECTOR_SIZE=4096
 # end of Wear Levelling
+
+#
+# ESP-MQTT Configurations
+#
+# default:
+CONFIG_MQTT_PROTOCOL_311=y
+# default:
+# CONFIG_MQTT_PROTOCOL_5 is not set
+# default:
+CONFIG_MQTT_TRANSPORT_SSL=y
+# default:
+CONFIG_MQTT_TRANSPORT_WEBSOCKET=y
+# default:
+CONFIG_MQTT_TRANSPORT_WEBSOCKET_SECURE=y
+# default:
+# CONFIG_MQTT_MSG_ID_INCREMENTAL is not set
+# default:
+# CONFIG_MQTT_SKIP_PUBLISH_IF_DISCONNECTED is not set
+# default:
+# CONFIG_MQTT_REPORT_DELETED_MESSAGES is not set
+# default:
+# CONFIG_MQTT_USE_CUSTOM_CONFIG is not set
+# default:
+# CONFIG_MQTT_TASK_CORE_SELECTION_ENABLED is not set
+# default:
+# CONFIG_MQTT_CUSTOM_OUTBOX is not set
+# end of ESP-MQTT Configurations
 # end of Component config
 
 # default:

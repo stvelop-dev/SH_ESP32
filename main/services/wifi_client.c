@@ -10,17 +10,12 @@
 
 #include "sdkconfig.h"
 
-static const char *TAG = "WifiClient";
+static const char *TAG = "Serv_WifiClient";
 
 static EventGroupHandle_t wifi_event_group;
 #define WIFI_CONNECTED_BIT BIT0
 
-static void wifiClient_eventHandler(
-    void *arg,
-    esp_event_base_t event_base,
-    int32_t event_id,
-    void *event_data
-)
+static void wifiClient_eventHandler(void *arg, esp_event_base_t event_base, int32_t event_id, void *event_data)
 {
     if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_START) {
         esp_wifi_connect();
@@ -39,7 +34,7 @@ static void wifiClient_eventHandler(
 
 void wifiClient_init(void)
 {
-#if CONFIG_FEATURE_SERVICE_WIFI_CLIENT
+#if CONFIG_SERVICES_WIFICLIENT
     ESP_LOGI(TAG, "Initializing WiFi client");
 
     esp_err_t ret = nvs_flash_init();
@@ -75,8 +70,8 @@ void wifiClient_init(void)
 
     wifi_config_t wifi_config = {
         .sta = {
-            .ssid = CONFIG_WIFI_SSID,
-            .password = CONFIG_WIFI_PASSWORD,
+            .ssid = CONFIG_SERVICES_WIFICLIENT_SSID,
+            .password = CONFIG_SERVICES_WIFICLIENT_PASSWORD,
         },
     };
 

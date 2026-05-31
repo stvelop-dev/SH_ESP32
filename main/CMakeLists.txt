@@ -8,7 +8,6 @@ set(SRC_FILES
 set(INCLUDE_DIRS
     "include/core"
     "include/services"
-    "include/services/Wifi"
     "include/features/interface"
     "include/features/device"
 )
@@ -30,11 +29,11 @@ if(CONFIG_FEATURE_DEVICE_SENSOR)
 endif()
 
 if(CONFIG_SERVICES_WIFIAP)
-    list(APPEND SRC_FILES "services/wifi/wifi_ap.c")
+    list(APPEND SRC_FILES "services/wifi_ap.c")
 endif()
 
 if(CONFIG_SERVICES_WIFICLIENT)
-    list(APPEND SRC_FILES "services/wifi/wifi_ap.c")
+    list(APPEND SRC_FILES "services/wifi_client.c")
 endif()
 
 if(CONFIG_SERVICES_SYSTIME)
