@@ -706,6 +706,40 @@ CONFIG_PARTITION_TABLE_MD5=y
 # end of Partition Table
 
 #
+# SmartHome
+#
+
+#
+# Interfaces
+#
+# default:
+# CONFIG_FEATURE_INTERFACE_MQTT is not set
+# end of Interfaces
+
+#
+# Devices
+#
+# default:
+# CONFIG_FEATURE_DEVICE_LIGHT is not set
+# default:
+# CONFIG_FEATURE_DEVICE_RELAY is not set
+# default:
+# CONFIG_FEATURE_DEVICE_SENSOR is not set
+# end of Devices
+
+#
+# Services
+#
+# default:
+# CONFIG_SERVICES_WIFIAP is not set
+# default:
+# CONFIG_SERVICES_WIFICLIENT is not set
+# default:
+# CONFIG_SERVICES_SYSTIME is not set
+# end of Services
+# end of SmartHome
+
+#
 # Compiler options
 #
 # default:
@@ -3235,23 +3269,6 @@ CONFIG_WL_SECTOR_SIZE_4096=y
 # default:
 CONFIG_WL_SECTOR_SIZE=4096
 # end of Wear Levelling
-
-#
-# SPL Features
-#
-CONFIG_FEATURE_INTERFACE_MQTT=y
-CONFIG_FEATURE_DEVICE_LIGHT=y
-CONFIG_LIGHT_COUNT=1
-CONFIG_LIGHT_START_GPIO=2
-CONFIG_FEATURE_DEVICE_RELAY=y
-CONFIG_RELAY_COUNT=1
-CONFIG_RELAY_START_GPIO=4
-CONFIG_FEATURE_DEVICE_SENSOR=y
-CONFIG_SENSOR_COUNT=1
-CONFIG_SENSOR_START_GPIO=5
-# CONFIG_FEATURE_SERVICES_WIFIAP is not set
-# CONFIG_FEATURE_SERVICES_SYSTIME is not set
-# end of SPL Features
 # end of Component config
 
 # default:

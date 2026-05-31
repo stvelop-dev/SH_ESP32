@@ -22,11 +22,15 @@
 #include "sec_none.h"
 #endif
 
-#if CONFIG_FEATURE_SERVICES_WIFIAP
+#if CONFIG_SERVICES_WIFIAP
 #include "wifi_ap.h"
 #endif
 
-#if CONFIG_FEATURE_SERVICES_SYSTIME
+#if CONFIG_SERVICES_WIFICLIENT
+#include "wifi_client.h"
+#endif
+
+#if CONFIG_SERVICES_SYSTIME
 #include "sys_time.h"
 #endif
 
@@ -34,11 +38,15 @@
 void featureRegistry_Init(void)
 {
 
-#if CONFIG_FEATURE_SERVICES_WIFIAP
+#if CONFIG_SERVICES_WIFIAP
     wifiAp_init();
 #endif
 
-#if CONFIG_FEATURE_SERVICES_SYSTIME
+#if CONFIG_SERVICES_WIFICLIENT
+    wifiClient_init();
+#endif
+
+#if CONFIG_SERVICES_SYSTIME
     systemTime_init();
 #endif
 
@@ -62,12 +70,8 @@ void featureRegistry_Init(void)
 
 void featureRegistry_Process(void)
 {
-#if CONFIG_FEATURE_SERVICES_SYSTIME
+#if CONFIG_SERVICES_SYSTIME
     systemTime_process();
-#endif
-
-#if CONFIG_FEATURE_AUTOMATION_NONE
-    automationNone_process();
 #endif
 
 }

@@ -4,3 +4,4 @@ source "D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/components/esp_app_f
 source "D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/components/esp_rom/Kconfig.projbuild"
 source "D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/components/esptool_py/Kconfig.projbuild"
 source "D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/components/partition_table/Kconfig.projbuild"
+source "D:/Projects/Espressif/Home/SH_EPS32Client/main/Kconfig.projbuild"

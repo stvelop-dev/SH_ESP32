@@ -1,4 +1,4 @@
-/* * Data converted from D:/Projects/Espressif/Home/SmartHome/build/esp-idf/mbedtls/x509_crt_bundle
+/* * Data converted from D:/Projects/Espressif/Home/SH_EPS32Client/build/esp-idf/mbedtls/x509_crt_bundle
  */
 .data
 #if !defined (__APPLE__) && !defined (__linux__)

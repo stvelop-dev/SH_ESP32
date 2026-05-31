@@ -7,9 +7,9 @@ set(SRC_FILES
 
 set(INCLUDE_DIRS
     "include/core"
+    "include/services"
     "include/features/interface"
     "include/features/device"
-    "include/features/services"
 )
 
 if(CONFIG_FEATURE_INTERFACE_MQTT)
@@ -28,12 +28,16 @@ if(CONFIG_FEATURE_DEVICE_SENSOR)
     list(APPEND SRC_FILES "features/device/dev_sensor.c")
 endif()
 
-if(CONFIG_FEATURE_SERVICES_WIFIAP)
-    list(APPEND SRC_FILES "features/services/wifi_ap.c")
+if(CONFIG_SERVICES_WIFIAP)
+    list(APPEND SRC_FILES "services/wifi_ap.c")
 endif()
 
-if(CONFIG_FEATURE_SERVICES_SYSTIME)
-    list(APPEND SRC_FILES "features/services/sys_time.c")
+if(CONFIG_SERVICES_WIFICLIENT)
+    list(APPEND SRC_FILES "services/wifi_ap.c")
+endif()
+
+if(CONFIG_SERVICES_SYSTIME)
+    list(APPEND SRC_FILES "services/sys_time.c")
 endif()
 
 idf_component_register(

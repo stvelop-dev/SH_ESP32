@@ -1,0 +1,93 @@
+menu "SmartHome"
+
+menu "Interfaces"
+
+config FEATURE_INTERFACE_MQTT
+    bool "Enable MQTT interface"
+    default n
+    select SERVICES_WIFICLIENT
+
+endmenu
+
+menu "Devices"
+
+config FEATURE_DEVICE_LIGHT
+    bool "Enable light device"
+    default n
+
+config LIGHT_COUNT
+    int "Number of lights"
+    default 1
+    range 0 4
+    depends on FEATURE_DEVICE_LIGHT
+
+config LIGHT_START_GPIO
+    int "First light GPIO"
+    default 2
+    depends on FEATURE_DEVICE_LIGHT
+
+config FEATURE_DEVICE_RELAY
+    bool "Enable relay device"
+    default n
+
+config RELAY_COUNT
+    int "Number of relays"
+    default 1
+    range 0 4
+    depends on FEATURE_DEVICE_RELAY
+
+config RELAY_START_GPIO
+    int "First relay GPIO"
+    default 4
+    depends on FEATURE_DEVICE_RELAY
+
+config FEATURE_DEVICE_SENSOR
+    bool "Enable sensor device"
+    default n
+
+config SENSOR_COUNT
+    int "Number of sensors"
+    default 1
+    range 0 4
+    depends on FEATURE_DEVICE_SENSOR
+
+config SENSOR_START_GPIO
+    int "First sensor GPIO"
+    default 5
+    depends on FEATURE_DEVICE_SENSOR
+
+endmenu
+
+menu "Services"
+
+config SERVICES_WIFIAP
+    bool "Enable WiFi Access Point"
+    default n
+
+config SERVICES_WIFICLIENT
+    bool "Enable WiFi client"
+    default n
+
+if SERVICES_WIFICLIENT
+
+menu "WiFi Configuration"
+
+config SERVICES_WIFICLIENT_SSID
+    string "WiFi SSID"
+    default "Ovolus"
+
+config SERVICES_WIFICLIENT_PASSWORD
+    string "WiFi Password"
+    default "Bolzplatz.2025"
+
+endmenu
+
+endif
+
+config SERVICES_SYSTIME
+    bool "Enable system time service"
+    default n
+
+endmenu
+
+endmenu

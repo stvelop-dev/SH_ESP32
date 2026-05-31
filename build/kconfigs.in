@@ -79,4 +79,3 @@ source "D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/components/ulp/Kconf
 source "D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/components/unity/Kconfig"
 source "D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/components/vfs/Kconfig"
 source "D:/Projects/Espressif/idf/.espressif/v6.0.1/esp-idf/components/wear_levelling/Kconfig"
-source "D:/Projects/Espressif/Home/SmartHome/main/Kconfig"

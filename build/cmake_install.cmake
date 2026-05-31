@@ -1,4 +1,4 @@
-# Install script for directory: D:/Projects/Espressif/Home/SmartHome
+# Install script for directory: D:/Projects/Espressif/Home/SH_EPS32Client
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,13 +39,13 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("D:/Projects/Espressif/Home/SmartHome/build/esp-idf/cmake_install.cmake")
+  include("D:/Projects/Espressif/Home/SH_EPS32Client/build/esp-idf/cmake_install.cmake")
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "D:/Projects/Espressif/Home/SmartHome/build/install_local_manifest.txt"
+  file(WRITE "D:/Projects/Espressif/Home/SH_EPS32Client/build/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
 if(CMAKE_INSTALL_COMPONENT)
@@ -61,6 +61,6 @@ else()
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "D:/Projects/Espressif/Home/SmartHome/build/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "D:/Projects/Espressif/Home/SH_EPS32Client/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

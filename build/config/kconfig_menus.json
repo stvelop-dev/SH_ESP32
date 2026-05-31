@@ -4875,6 +4875,200 @@
                 "children": [
                     {
                         "children": [],
+                        "depends_on": null,
+                        "help": null,
+                        "id": "FEATURE_INTERFACE_MQTT",
+                        "name": "FEATURE_INTERFACE_MQTT",
+                        "range": null,
+                        "title": "Enable MQTT interface",
+                        "type": "bool"
+                    }
+                ],
+                "depends_on": null,
+                "id": "smarthome-interfaces-D:-Projects-Espressif-Home-SH_EPS32Client-main-Kconfig.projbuild-3",
+                "title": "Interfaces",
+                "type": "menu"
+            },
+            {
+                "children": [
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "FEATURE_DEVICE_LIGHT",
+                                "help": null,
+                                "id": "LIGHT_COUNT",
+                                "name": "LIGHT_COUNT",
+                                "range": null,
+                                "title": "Number of lights",
+                                "type": "int"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "FEATURE_DEVICE_LIGHT",
+                                "help": null,
+                                "id": "LIGHT_START_GPIO",
+                                "name": "LIGHT_START_GPIO",
+                                "range": null,
+                                "title": "First light GPIO",
+                                "type": "int"
+                            }
+                        ],
+                        "depends_on": null,
+                        "help": null,
+                        "id": "FEATURE_DEVICE_LIGHT",
+                        "name": "FEATURE_DEVICE_LIGHT",
+                        "range": null,
+                        "title": "Enable light device",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "FEATURE_DEVICE_RELAY",
+                                "help": null,
+                                "id": "RELAY_COUNT",
+                                "name": "RELAY_COUNT",
+                                "range": null,
+                                "title": "Number of relays",
+                                "type": "int"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "FEATURE_DEVICE_RELAY",
+                                "help": null,
+                                "id": "RELAY_START_GPIO",
+                                "name": "RELAY_START_GPIO",
+                                "range": null,
+                                "title": "First relay GPIO",
+                                "type": "int"
+                            }
+                        ],
+                        "depends_on": null,
+                        "help": null,
+                        "id": "FEATURE_DEVICE_RELAY",
+                        "name": "FEATURE_DEVICE_RELAY",
+                        "range": null,
+                        "title": "Enable relay device",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "FEATURE_DEVICE_SENSOR",
+                                "help": null,
+                                "id": "SENSOR_COUNT",
+                                "name": "SENSOR_COUNT",
+                                "range": null,
+                                "title": "Number of sensors",
+                                "type": "int"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "FEATURE_DEVICE_SENSOR",
+                                "help": null,
+                                "id": "SENSOR_START_GPIO",
+                                "name": "SENSOR_START_GPIO",
+                                "range": null,
+                                "title": "First sensor GPIO",
+                                "type": "int"
+                            }
+                        ],
+                        "depends_on": null,
+                        "help": null,
+                        "id": "FEATURE_DEVICE_SENSOR",
+                        "name": "FEATURE_DEVICE_SENSOR",
+                        "range": null,
+                        "title": "Enable sensor device",
+                        "type": "bool"
+                    }
+                ],
+                "depends_on": null,
+                "id": "smarthome-devices-D:-Projects-Espressif-Home-SH_EPS32Client-main-Kconfig.projbuild-12",
+                "title": "Devices",
+                "type": "menu"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": null,
+                        "id": "SERVICES_WIFIAP",
+                        "name": "SERVICES_WIFIAP",
+                        "range": null,
+                        "title": "Enable WiFi Access Point",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [
+                            {
+                                "children": [
+                                    {
+                                        "children": [],
+                                        "depends_on": "SERVICES_WIFICLIENT",
+                                        "help": null,
+                                        "id": "SERVICES_WIFICLIENT_SSID",
+                                        "name": "SERVICES_WIFICLIENT_SSID",
+                                        "range": null,
+                                        "title": "WiFi SSID",
+                                        "type": "string"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "SERVICES_WIFICLIENT",
+                                        "help": null,
+                                        "id": "SERVICES_WIFICLIENT_PASSWORD",
+                                        "name": "SERVICES_WIFICLIENT_PASSWORD",
+                                        "range": null,
+                                        "title": "WiFi Password",
+                                        "type": "string"
+                                    }
+                                ],
+                                "depends_on": "SERVICES_WIFICLIENT",
+                                "id": "smarthome-services-enable-wifi-client-wifi-configuration-D:-Projects-Espressif-Home-SH_EPS32Client-main-Kconfig.projbuild-73",
+                                "title": "WiFi Configuration",
+                                "type": "menu"
+                            }
+                        ],
+                        "depends_on": null,
+                        "help": null,
+                        "id": "SERVICES_WIFICLIENT",
+                        "name": "SERVICES_WIFICLIENT",
+                        "range": null,
+                        "title": "Enable WiFi client",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": null,
+                        "id": "SERVICES_SYSTIME",
+                        "name": "SERVICES_SYSTIME",
+                        "range": null,
+                        "title": "Enable system time service",
+                        "type": "bool"
+                    }
+                ],
+                "depends_on": null,
+                "id": "smarthome-services-D:-Projects-Espressif-Home-SH_EPS32Client-main-Kconfig.projbuild-61",
+                "title": "Services",
+                "type": "menu"
+            }
+        ],
+        "depends_on": null,
+        "id": "smarthome-D:-Projects-Espressif-Home-SH_EPS32Client-main-Kconfig.projbuild-1",
+        "title": "SmartHome",
+        "type": "menu"
+    },
+    {
+        "children": [
+            {
+                "children": [
+                    {
+                        "children": [],
                         "depends_on": "<choice COMPILER_OPTIMIZATION>",
                         "help": null,
                         "id": "COMPILER_OPTIMIZATION_DEBUG",
@@ -34462,146 +34656,6 @@
                 "depends_on": null,
                 "id": "component-config-wear-levelling-D:-Projects-Espressif-idf-.espressif-v6.0.1-esp-idf-components-wear_levelling-Kconfig-1",
                 "title": "Wear Levelling",
-                "type": "menu"
-            },
-            {
-                "children": [
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": null,
-                        "id": "FEATURE_INTERFACE_MQTT",
-                        "name": "FEATURE_INTERFACE_MQTT",
-                        "range": null,
-                        "title": "Enable MQTT interface",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [
-                            {
-                                "children": [],
-                                "depends_on": "FEATURE_DEVICE_LIGHT",
-                                "help": null,
-                                "id": "LIGHT_COUNT",
-                                "name": "LIGHT_COUNT",
-                                "range": [
-                                    0,
-                                    4
-                                ],
-                                "title": "Number of lights",
-                                "type": "int"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "FEATURE_DEVICE_LIGHT",
-                                "help": null,
-                                "id": "LIGHT_START_GPIO",
-                                "name": "LIGHT_START_GPIO",
-                                "range": null,
-                                "title": "First light GPIO",
-                                "type": "int"
-                            }
-                        ],
-                        "depends_on": null,
-                        "help": null,
-                        "id": "FEATURE_DEVICE_LIGHT",
-                        "name": "FEATURE_DEVICE_LIGHT",
-                        "range": null,
-                        "title": "Enable light device",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [
-                            {
-                                "children": [],
-                                "depends_on": "FEATURE_DEVICE_RELAY",
-                                "help": null,
-                                "id": "RELAY_COUNT",
-                                "name": "RELAY_COUNT",
-                                "range": [
-                                    0,
-                                    4
-                                ],
-                                "title": "Number of relays",
-                                "type": "int"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "FEATURE_DEVICE_RELAY",
-                                "help": null,
-                                "id": "RELAY_START_GPIO",
-                                "name": "RELAY_START_GPIO",
-                                "range": null,
-                                "title": "First relay GPIO",
-                                "type": "int"
-                            }
-                        ],
-                        "depends_on": null,
-                        "help": null,
-                        "id": "FEATURE_DEVICE_RELAY",
-                        "name": "FEATURE_DEVICE_RELAY",
-                        "range": null,
-                        "title": "Enable relay device",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [
-                            {
-                                "children": [],
-                                "depends_on": "FEATURE_DEVICE_SENSOR",
-                                "help": null,
-                                "id": "SENSOR_COUNT",
-                                "name": "SENSOR_COUNT",
-                                "range": [
-                                    0,
-                                    4
-                                ],
-                                "title": "Number of sensors",
-                                "type": "int"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "FEATURE_DEVICE_SENSOR",
-                                "help": null,
-                                "id": "SENSOR_START_GPIO",
-                                "name": "SENSOR_START_GPIO",
-                                "range": null,
-                                "title": "First sensor GPIO",
-                                "type": "int"
-                            }
-                        ],
-                        "depends_on": null,
-                        "help": null,
-                        "id": "FEATURE_DEVICE_SENSOR",
-                        "name": "FEATURE_DEVICE_SENSOR",
-                        "range": null,
-                        "title": "Enable sensor device",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": null,
-                        "id": "FEATURE_SERVICES_WIFIAP",
-                        "name": "FEATURE_SERVICES_WIFIAP",
-                        "range": null,
-                        "title": "Enable WiFi Access Point",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": null,
-                        "id": "FEATURE_SERVICES_SYSTIME",
-                        "name": "FEATURE_SERVICES_SYSTIME",
-                        "range": null,
-                        "title": "Enable system time service",
-                        "type": "bool"
-                    }
-                ],
-                "depends_on": null,
-                "id": "component-config-spl-features-D:-Projects-Espressif-Home-SmartHome-main-Kconfig-1",
-                "title": "SPL Features",
                 "type": "menu"
             },
             {
