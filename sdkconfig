@@ -712,15 +712,17 @@ CONFIG_PARTITION_TABLE_MD5=y
 #
 # Interfaces
 #
-# default:
-# CONFIG_FEATURE_INTERFACE_MQTT is not set
+CONFIG_FEATURE_INTERFACE_MQTT=y
 # end of Interfaces
 
 #
 # Devices
 #
+CONFIG_FEATURE_DEVICE_LIGHT=y
 # default:
-# CONFIG_FEATURE_DEVICE_LIGHT is not set
+CONFIG_LIGHT_COUNT=1
+# default:
+CONFIG_LIGHT_START_GPIO=2
 # default:
 # CONFIG_FEATURE_DEVICE_RELAY is not set
 # default:
@@ -733,7 +735,17 @@ CONFIG_PARTITION_TABLE_MD5=y
 # default:
 # CONFIG_SERVICES_WIFIAP is not set
 # default:
-# CONFIG_SERVICES_WIFICLIENT is not set
+CONFIG_SERVICES_WIFICLIENT=y
+
+#
+# WiFi Configuration
+#
+# default:
+CONFIG_SERVICES_WIFICLIENT_SSID="Ovolus"
+# default:
+CONFIG_SERVICES_WIFICLIENT_PASSWORD="Bolzplatz.2025"
+# end of WiFi Configuration
+
 # default:
 # CONFIG_SERVICES_SYSTIME is not set
 # end of Services

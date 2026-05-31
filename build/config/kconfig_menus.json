@@ -4899,7 +4899,10 @@
                                 "help": null,
                                 "id": "LIGHT_COUNT",
                                 "name": "LIGHT_COUNT",
-                                "range": null,
+                                "range": [
+                                    0,
+                                    4
+                                ],
                                 "title": "Number of lights",
                                 "type": "int"
                             },

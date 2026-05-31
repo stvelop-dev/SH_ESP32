@@ -6,7 +6,7 @@
 #include "int_mqtt.h"
 #endif
 
-#if CONFIG_FEATURE_DEVICE_RELAY
+#if CONFIG_FEATURE_DEVICE_LIGHT
 #include "dev_light.h"
 #endif
 

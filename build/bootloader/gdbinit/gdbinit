@@ -1,0 +1,2 @@
+source D:/Projects/Espressif/Home/SH_EPS32Client/build/bootloader/gdbinit/symbols
+source D:/Projects/Espressif/Home/SH_EPS32Client/build/bootloader/gdbinit/connect
