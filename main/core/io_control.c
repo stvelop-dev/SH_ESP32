@@ -3,7 +3,6 @@
 
 #include "io_control.h"
 #include "device_manager.h"
-#include "io_control.h"
 
 void ioControl_init(void)
 {
@@ -24,7 +23,7 @@ int ioControl_getType(int id)
     return dev->type;
 }
 
-int ioControl_getDeviceCount(void)
+int ioControl_getDeviceCount()
 {
     return deviceManager_getCount();
 }
@@ -50,22 +49,22 @@ ioControl_result_t ioControl_setDevice(int device_id, bool state)
         return IOCONTROL_ERRORNOTSWITCHABLE;
     }
 
-    deviceManager_setOn(device, state);
-
+    deviceManager_setState(device, state);
     return IOCONTROL_OK;
 }
 
-void ioControl_setBrightness(int device_id, int brightness)
+ioControl_result_t ioControl_setBrightness(int device_id, int brightness)
 {
     device_t *device = deviceManager_getId(device_id);
 
     if (device == NULL) {
-        return;
+        return IOCONTROL_ERRORNOTFOUND;;
     }
 
     if (device->type != DEVICE_TYPE_LIGHT) {
-        return;
+        return IOCONTROL_ERRORNOTSWITCHABLE;
     }
 
     deviceManager_setBrightness(device, brightness);
+    return IOCONTROL_OK;
 }

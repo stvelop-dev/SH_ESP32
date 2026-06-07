@@ -1,6 +1,9 @@
 #include "feature_registry.h"
 #include "sdkconfig.h"
 
+#if CONFIG_FEATURE_INTERFACE_CLI
+#include "int_cli.h"
+#endif
 
 #if CONFIG_FEATURE_INTERFACE_MQTT
 #include "int_mqtt.h"
@@ -60,6 +63,10 @@ void featureRegistry_Init(void)
 
 #if CONFIG_FEATURE_DEVICE_SENSOR
     sensorDevice_init();
+#endif
+
+#if CONFIG_FEATURE_INTERFACE_CLI
+    cliInterface_init();
 #endif
 
 #if CONFIG_FEATURE_INTERFACE_MQTT

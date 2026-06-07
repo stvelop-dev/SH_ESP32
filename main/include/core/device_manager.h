@@ -10,6 +10,7 @@ typedef struct {
     int gpio_pin;
     bool is_on;
     int brightness;
+    int pwm_channel;
 } device_t;
 
 void deviceManager_init(void);
@@ -18,5 +19,5 @@ int deviceManager_getCount(void);
 int deviceManager_getValue(device_t *device);
 device_t *deviceManager_getId(int id);
 
-void deviceManager_setOn(device_t *device, bool on);
+void deviceManager_setState(device_t *device, bool on);
 void deviceManager_setBrightness(device_t *device, int brightness);

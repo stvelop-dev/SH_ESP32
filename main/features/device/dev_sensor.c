@@ -21,14 +21,14 @@ void sensorDevice_init(void)
     int start_id = 0;
 
 #if CONFIG_FEATURE_DEVICE_LIGHT
-    start_id += CONFIG_LIGHT_COUNT;
+    start_id += CONFIG_FEATURE_DEVICE_LIGHT_COUNT;
 #endif
 
 #if CONFIG_FEATURE_DEVICE_RELAY
-    start_id += CONFIG_RELAY_COUNT;
+    start_id += CONFIG_FEATURE_DEVICE_RELAY_COUNT;
 #endif
 
-    for (int i = 0; i < CONFIG_SENSOR_COUNT; i++) {
+    for (int i = 0; i < CONFIG_FEATURE_DEVICE_SENSOR_COUNT; i++) {
         int id = start_id + i;
 
         device_t *device = deviceManager_getId(id);
@@ -40,7 +40,7 @@ void sensorDevice_init(void)
         device->id = id;
         device->name = "Sensor";
         device->type = DEVICE_TYPE_SENSOR;
-        device->gpio_pin = CONFIG_SENSOR_START_GPIO + i;
+        device->gpio_pin = CONFIG_FEATURE_DEVICE_SENSOR_STARTIO + i;
         device->is_on = false;
         device->brightness = -1;
 

@@ -1,8 +1,12 @@
+#include <stdlib.h>
 #include <string.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 #include "mqtt_client.h"
 #include "esp_log.h"
 
 #include "int_mqtt.h"
+#include "update_ota.h"
 #include "io_control.h"
 
 static const char *TAG = "Feat_MQTT";
@@ -55,6 +59,16 @@ static void mqtt_publish_device_state(int id, int state)
     snprintf(payload, sizeof(payload), "%d", state ? 1 : 0);
 
     esp_mqtt_client_publish(mqtt_client, topic, payload, 0, 1, 1);
+}
+
+static void mqtt_ota_task(void *param)
+{
+    char *url = (char *)param;
+
+    ota_start(url);
+
+    free(url);
+    vTaskDelete(NULL);
 }
 
 static void mqttInterface_eventHandler(void *handler_args,esp_event_base_t base,int32_t event_id,void *event_data)
@@ -135,6 +149,31 @@ static void mqttInterface_eventHandler(void *handler_args,esp_event_base_t base,
                 snprintf(response_data, sizeof(response_data), "%d", value);
 
                 esp_mqtt_client_publish(mqtt_client, response_topic, response_data, 0, 0, 0);
+            }
+
+            else if (strcmp(category, "ota") == 0 && strcmp(command, "update") == 0)
+            {
+                if (ota_isRunning()) {
+                    ESP_LOGW(TAG, "OTA already running");
+                    break;
+                }
+                char *url = strdup(data);
+                if (url == NULL) {
+                    ESP_LOGE(TAG, "Could not allocate OTA URL");
+                    break;
+                }
+
+                ESP_LOGI(TAG, "OTA update requested: %s", url);
+
+                xTaskCreate(
+                    mqtt_ota_task,
+                    "mqtt_ota_task",
+                    8192,
+                    url,
+                    5,
+                    NULL
+                );
+                break;
             }
         }
 

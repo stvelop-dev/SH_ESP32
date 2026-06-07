@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+#include "update_ota.h"
 #include "feature_registry.h"
 #include "io_control.h"
 #include "freertos/FreeRTOS.h"
@@ -8,6 +9,7 @@
 void app_main(void)
 {
     //setup
+    ota_init();
     ioControl_init();
     featureRegistry_Init();
     

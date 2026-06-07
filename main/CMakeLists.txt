@@ -1,5 +1,6 @@
 set(SRC_FILES
     "app_main.c"
+    "core/update_ota.c"
     "core/device_manager.c"
     "core/io_control.c"
     "core/feature_registry.c"
@@ -11,6 +12,10 @@ set(INCLUDE_DIRS
     "include/features/interface"
     "include/features/device"
 )
+
+if(CONFIG_FEATURE_INTERFACE_CLI)
+    list(APPEND SRC_FILES "features/interface/int_cli.c")
+endif()
 
 if(CONFIG_FEATURE_INTERFACE_MQTT)
     list(APPEND SRC_FILES "features/interface/int_mqtt.c")

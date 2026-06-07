@@ -2,6 +2,10 @@ menu "SmartHome"
 
 menu "Interfaces"
 
+config FEATURE_INTERFACE_CLI
+    bool "Enable CLI interface"
+    default n
+
 config FEATURE_INTERFACE_MQTT
     bool "Enable MQTT interface"
     default n
@@ -13,7 +17,7 @@ menu "Mqtt Configuration"
 
 config FEATURE_INTERFACE_MQTT_BROKERURI
     string "MQTT Broker URI"
-    default "mqtt://192.168.178.10"
+    default "mqtt://192.168.178.65"
     depends on FEATURE_INTERFACE_MQTT
 
 config FEATURE_INTERFACE_MQTT_DEVICEID
@@ -33,13 +37,13 @@ config FEATURE_DEVICE_LIGHT
     bool "Enable light device"
     default n
 
-config LIGHT_COUNT
+config FEATURE_DEVICE_LIGHT_COUNT
     int "Number of lights"
     default 1
     range 0 4
     depends on FEATURE_DEVICE_LIGHT
 
-config LIGHT_START_GPIO
+config FEATURE_DEVICE_LIGHT_STARTIO
     int "First light GPIO"
     default 2
     depends on FEATURE_DEVICE_LIGHT
@@ -48,13 +52,13 @@ config FEATURE_DEVICE_RELAY
     bool "Enable relay device"
     default n
 
-config RELAY_COUNT
+config FEATURE_DEVICE_RELAY_COUNT
     int "Number of relays"
     default 1
     range 0 4
     depends on FEATURE_DEVICE_RELAY
 
-config RELAY_START_GPIO
+config FEATURE_DEVICE_RELAY_STARTIO
     int "First relay GPIO"
     default 4
     depends on FEATURE_DEVICE_RELAY
@@ -63,13 +67,13 @@ config FEATURE_DEVICE_SENSOR
     bool "Enable sensor device"
     default n
 
-config SENSOR_COUNT
+config FEATURE_DEVICE_SENSOR_COUNT
     int "Number of sensors"
     default 1
     range 0 4
     depends on FEATURE_DEVICE_SENSOR
 
-config SENSOR_START_GPIO
+config FEATURE_DEVICE_SENSOR_STARTIO
     int "First sensor GPIO"
     default 5
     depends on FEATURE_DEVICE_SENSOR
