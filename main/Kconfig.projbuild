@@ -22,7 +22,7 @@ config FEATURE_INTERFACE_MQTT_BROKERURI
 
 config FEATURE_INTERFACE_MQTT_DEVICEID
     string "MQTT Device ID"
-    default "esp32_example"
+    default "esp32"
     depends on FEATURE_INTERFACE_MQTT
 
 endmenu

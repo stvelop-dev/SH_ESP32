@@ -4,6 +4,7 @@
 #include "freertos/task.h"
 #include "mqtt_client.h"
 #include "esp_log.h"
+#include "esp_app_desc.h"
 
 #include "int_mqtt.h"
 #include "update_ota.h"
@@ -12,6 +13,37 @@
 static const char *TAG = "Feat_MQTT";
 
 static esp_mqtt_client_handle_t mqtt_client = NULL;
+
+static void mqtt_publish_discovery_firmware(void)
+{
+    char topic[128];
+    char payload[512];
+
+    snprintf(topic, sizeof(topic),
+             "homeassistant/sensor/%s_firmware/config",
+             CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID);
+
+    snprintf(payload, sizeof(payload),
+            "{"
+                "\"name\":\"Firmware Version\","
+                "\"unique_id\":\"%s_firmware_version\","
+                "\"state_topic\":\"smarthome/%s/firmware/version\","
+                "\"entity_category\":\"diagnostic\","
+                "\"icon\":\"mdi:chip\","
+                "\"device\":{"
+                    "\"identifiers\":[\"%s\"],"
+                    "\"name\":\"%s\","
+                    "\"manufacturer\":\"Custom\","
+                    "\"model\":\"ESP32 Smart Home\""
+                "}"
+            "}",
+            CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID,
+            CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID,
+            CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID,
+            CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID);
+
+    esp_mqtt_client_publish(mqtt_client, topic, payload, 0, 1, 1);
+}
 
 static void mqtt_publish_discovery_device(int id)
 {
@@ -46,6 +78,15 @@ static void mqtt_publish_discovery_device(int id)
              CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID);
 
     esp_mqtt_client_publish(mqtt_client, topic, payload, 0, 1, 1);
+}
+
+static void mqtt_publish_firmware_version(void)
+{
+    const esp_app_desc_t *app = esp_app_get_description();
+
+    esp_mqtt_client_publish(mqtt_client,
+        "smarthome/" CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID "/firmware/version",
+        app->version, 0, 1, 1);
 }
 
 static void mqtt_publish_device_state(int id, int state)
@@ -83,6 +124,9 @@ static void mqttInterface_eventHandler(void *handler_args,esp_event_base_t base,
 
         snprintf(topic, sizeof(topic), "smarthome/%s/#", CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID);
         esp_mqtt_client_subscribe(mqtt_client, topic, 0);
+
+        mqtt_publish_discovery_firmware();
+        mqtt_publish_firmware_version();
 
         for (int id = 0; id < ioControl_getDeviceCount(); id++) {
             mqtt_publish_discovery_device(id);
