@@ -1,4 +1,6 @@
 #include "wifi_client.h"
+#include "esp_netif.h"
+#include "lwip/inet.h"
 
 #include "esp_log.h"
 #include "esp_wifi.h"
@@ -28,6 +30,21 @@ static void wifiClient_eventHandler(void *arg, esp_event_base_t event_base, int3
 
     if (event_base == IP_EVENT && event_id == IP_EVENT_STA_GOT_IP) {
         ESP_LOGI(TAG, "WiFi connected");
+
+        esp_netif_t *netif = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
+
+        esp_netif_dns_info_t dns;
+        dns.ip.type = IPADDR_TYPE_V4;
+        dns.ip.u_addr.ip4.addr = ipaddr_addr(CONFIG_SERVICES_WIFICLIENT_DNSSERVER);
+
+        ESP_ERROR_CHECK(esp_netif_set_dns_info(netif, ESP_NETIF_DNS_MAIN, &dns));
+
+        ESP_LOGI(TAG, "DNS Server set to %s", CONFIG_SERVICES_WIFICLIENT_DNSSERVER);
+
+        esp_netif_get_dns_info(netif, ESP_NETIF_DNS_MAIN, &dns);
+
+        ESP_LOGI(TAG, "Active DNS Server: " IPSTR, IP2STR(&dns.ip.u_addr.ip4));
+
         xEventGroupSetBits(wifi_event_group, WIFI_CONNECTED_BIT);
     }
 }

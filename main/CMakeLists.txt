@@ -48,4 +48,6 @@ endif()
 idf_component_register(
     SRCS ${SRC_FILES}
     INCLUDE_DIRS ${INCLUDE_DIRS}
+    EMBED_TXTFILES
+        "core/certs/ca_cert.pem"
 )

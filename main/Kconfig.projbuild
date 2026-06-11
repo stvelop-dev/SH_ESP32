@@ -102,6 +102,10 @@ config SERVICES_WIFICLIENT_PASSWORD
     string "WiFi Password"
     default "Bolzplatz.2025"
 
+config SERVICES_WIFICLIENT_DNSSERVER
+    string "DNS Server"
+    default "192.168.178.65"
+
 endmenu
 
 endif

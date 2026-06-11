@@ -7,6 +7,9 @@
 
 static const char *TAG = "Core_OTA";
 
+extern const char ca_cert_pem_start[] asm("_binary_ca_cert_pem_start");
+extern const char ca_cert_pem_end[] asm("_binary_ca_cert_pem_end");
+
 static bool s_otaRunning = false;
 
 esp_err_t ota_init(void)
@@ -43,10 +46,9 @@ esp_err_t ota_start(const char *url)
 
     esp_http_client_config_t http_config = {
         .url = url,
-        .cert_pem = NULL,
+        .cert_pem = ca_cert_pem_start,
         .timeout_ms = 10000,
         .keep_alive_enable = true,
-        .skip_cert_common_name_check = true,
     };
 
     esp_https_ota_config_t ota_config = {
