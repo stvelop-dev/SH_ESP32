@@ -108,7 +108,33 @@ static void mqttInterface_eventHandler(void *handler_args,esp_event_base_t base,
         ESP_LOGI(TAG, "Topic: %s", topic);
         ESP_LOGI(TAG, "Data: %s", data);
 
-        if (sscanf(topic, "smarthome/%*[^/]/%31[^/]/%d/%31[^/]", category, &id, command) == 3)
+        if (strcmp(topic, "smarthome/" CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID "/ota/update") == 0)
+        {
+            if (ota_isRunning()) {
+                ESP_LOGW(TAG, "OTA already running");
+                break;
+            }
+
+            char *url = strdup(data);
+            if (url == NULL) {
+                ESP_LOGE(TAG, "Could not allocate OTA URL");
+                break;
+            }
+
+            ESP_LOGI(TAG, "OTA update requested: %s", url);
+
+            xTaskCreate(
+                mqtt_ota_task,
+                "mqtt_ota_task",
+                8192,
+                url,
+                5,
+                NULL
+            );
+
+            break;
+        }
+        else if (sscanf(topic, "smarthome/%*[^/]/%31[^/]/%d/%31[^/]", category, &id, command) == 3)
         {
             if (!ioControl_exists(id)) {
                 ESP_LOGW(TAG, "Unknown device id: %d", id);
@@ -149,31 +175,6 @@ static void mqttInterface_eventHandler(void *handler_args,esp_event_base_t base,
                 snprintf(response_data, sizeof(response_data), "%d", value);
 
                 esp_mqtt_client_publish(mqtt_client, response_topic, response_data, 0, 0, 0);
-            }
-
-            else if (strcmp(category, "ota") == 0 && strcmp(command, "update") == 0)
-            {
-                if (ota_isRunning()) {
-                    ESP_LOGW(TAG, "OTA already running");
-                    break;
-                }
-                char *url = strdup(data);
-                if (url == NULL) {
-                    ESP_LOGE(TAG, "Could not allocate OTA URL");
-                    break;
-                }
-
-                ESP_LOGI(TAG, "OTA update requested: %s", url);
-
-                xTaskCreate(
-                    mqtt_ota_task,
-                    "mqtt_ota_task",
-                    8192,
-                    url,
-                    5,
-                    NULL
-                );
-                break;
             }
         }
 

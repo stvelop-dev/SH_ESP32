@@ -43,8 +43,10 @@ esp_err_t ota_start(const char *url)
 
     esp_http_client_config_t http_config = {
         .url = url,
+        .cert_pem = NULL,
         .timeout_ms = 10000,
         .keep_alive_enable = true,
+        .skip_cert_common_name_check = true,
     };
 
     esp_https_ota_config_t ota_config = {
