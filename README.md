@@ -3,11 +3,19 @@
 
 ESP32-based smart home client with MQTT communication, OTA firmware updates, and Home Assistant integration.
 
+Gitlab
 ```
 cd existing_repo
 git remote add origin https://gitlab.com/homebase2025/esp32client.git
 git branch -M main
 git push -uf origin main
+```
+
+Github
+```
+cd existing_repo
+git remote add github https://github.com/stvelop-dev/SH_ESP32.git
+git push -u github main
 ```
 
 ## Architecture
