@@ -4,13 +4,22 @@ set(SRC_FILES
     "core/device_manager.c"
     "core/io_control.c"
     "core/feature_registry.c"
+
+    "features/components/output_analog.c"
+    "features/components/output_binary.c"
+    "features/components/input_analog.c"
+    "features/components/input_binary.c"
 )
 
 set(INCLUDE_DIRS
     "include/core"
     "include/services"
     "include/features/interface"
-    "include/features/device"
+    "include/features/components"
+)
+
+set(CERTS 
+    "core/certs/ca_cert.pem"
 )
 
 if(CONFIG_FEATURE_INTERFACE_CLI)
@@ -21,17 +30,6 @@ if(CONFIG_FEATURE_INTERFACE_MQTT)
     list(APPEND SRC_FILES "features/interface/int_mqtt.c")
 endif()
 
-if(CONFIG_FEATURE_DEVICE_LIGHT)
-    list(APPEND SRC_FILES "features/device/dev_light.c")
-endif()
-
-if(CONFIG_FEATURE_DEVICE_RELAY)
-    list(APPEND SRC_FILES "features/device/dev_relay.c")
-endif()
-
-if(CONFIG_FEATURE_DEVICE_SENSOR)
-    list(APPEND SRC_FILES "features/device/dev_sensor.c")
-endif()
 
 if(CONFIG_SERVICES_WIFIAP)
     list(APPEND SRC_FILES "services/wifi_ap.c")
@@ -48,6 +46,5 @@ endif()
 idf_component_register(
     SRCS ${SRC_FILES}
     INCLUDE_DIRS ${INCLUDE_DIRS}
-    EMBED_TXTFILES
-        "core/certs/ca_cert.pem"
+    EMBED_TXTFILES ${CERTS}
 )

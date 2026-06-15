@@ -54,7 +54,7 @@ main/
 
 ## Requirements
 
-- ESP-IDF v5.x
+- ESP-IDF v5.5.4 or higher
 - ESP32 development board
 - MQTT broker (e.g. Mosquitto)
 - Optional: Home Assistant

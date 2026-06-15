@@ -1,6 +1,6 @@
 #pragma once
 
-#include "device_types.h"
+#include "component_types.h"
 
 typedef enum {
     IOCONTROL_OK,
@@ -10,8 +10,8 @@ typedef enum {
 
 void ioControl_init(void);
 
-ioControl_result_t ioControl_setDevice(int device_id, bool state);
-ioControl_result_t ioControl_setBrightness(int device_id, int brightness);
+ioControl_result_t ioControl_setState(int device_id, bool state);
+ioControl_result_t ioControl_setLevel(int device_id, int level);
 
 int ioControl_getValue(int id);
 int ioControl_getType(int id);

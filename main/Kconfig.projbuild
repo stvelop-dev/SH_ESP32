@@ -31,52 +31,231 @@ endif
 
 endmenu
 
-menu "Devices"
+menu "IO Selection"
 
-config FEATURE_DEVICE_LIGHT
-    bool "Enable light device"
-    default n
+choice FEATURE_COMPONENT_GPIO2_FUNCTION
+    prompt "GPIO 2 Function"
+    default FEATURE_COMPONENT_GPIO2_UNUSED
 
-config FEATURE_DEVICE_LIGHT_COUNT
-    int "Number of lights"
-    default 1
-    range 0 4
-    depends on FEATURE_DEVICE_LIGHT
+config FEATURE_COMPONENT_GPIO2_UNUSED
+    bool "Unused"
 
-config FEATURE_DEVICE_LIGHT_STARTIO
-    int "First light GPIO"
-    default 2
-    depends on FEATURE_DEVICE_LIGHT
+config FEATURE_COMPONENT_GPIO2_OUTPUT_ANALOG
+    bool "PWM Output"
 
-config FEATURE_DEVICE_RELAY
-    bool "Enable relay device"
-    default n
+config FEATURE_COMPONENT_GPIO2_OUTPUT_BINARY
+    bool "Binary Output"
 
-config FEATURE_DEVICE_RELAY_COUNT
-    int "Number of relays"
-    default 1
-    range 0 4
-    depends on FEATURE_DEVICE_RELAY
+config FEATURE_COMPONENT_GPIO2_INPUT_BINARY
+    bool "Binary Input"
 
-config FEATURE_DEVICE_RELAY_STARTIO
-    int "First relay GPIO"
-    default 4
-    depends on FEATURE_DEVICE_RELAY
+config FEATURE_COMPONENT_GPIO2_INPUT_ANALOG
+    bool "Analog Input"
 
-config FEATURE_DEVICE_SENSOR
-    bool "Enable sensor device"
-    default n
+endchoice
 
-config FEATURE_DEVICE_SENSOR_COUNT
-    int "Number of sensors"
-    default 1
-    range 0 4
-    depends on FEATURE_DEVICE_SENSOR
+choice FEATURE_COMPONENT_GPIO2_INPUT_BINARY_PULL
+    prompt "GPIO 2 Binary Input Pull Mode"
+    default FEATURE_COMPONENT_GPIO2_INPUT_BINARY_PULLUP
+    depends on FEATURE_COMPONENT_GPIO2_INPUT_BINARY
 
-config FEATURE_DEVICE_SENSOR_STARTIO
-    int "First sensor GPIO"
-    default 5
-    depends on FEATURE_DEVICE_SENSOR
+config FEATURE_COMPONENT_GPIO2_INPUT_BINARY_PULLUP
+    bool "Pull-up"
+
+config FEATURE_COMPONENT_GPIO2_INPUT_BINARY_PULLDOWN
+    bool "Pull-down"
+
+config FEATURE_COMPONENT_GPIO2_INPUT_BINARY_FLOATING
+    bool "Floating / no pull"
+
+endchoice
+
+
+choice FEATURE_COMPONENT_GPIO4_FUNCTION
+    prompt "GPIO 4 Function"
+    default FEATURE_COMPONENT_GPIO4_UNUSED
+
+config FEATURE_COMPONENT_GPIO4_UNUSED
+    bool "Unused"
+
+config FEATURE_COMPONENT_GPIO4_OUTPUT_ANALOG
+    bool "PWM Output"
+
+config FEATURE_COMPONENT_GPIO4_OUTPUT_BINARY
+    bool "Binary Output"
+
+config FEATURE_COMPONENT_GPIO4_INPUT_BINARY
+    bool "Binary Input"
+
+config FEATURE_COMPONENT_GPIO4_INPUT_ANALOG
+    bool "Analog Input"
+
+endchoice
+
+choice FEATURE_COMPONENT_GPIO4_INPUT_BINARY_PULL
+    prompt "GPIO 4 Binary Input Pull Mode"
+    default FEATURE_COMPONENT_GPIO4_INPUT_BINARY_PULLUP
+    depends on FEATURE_COMPONENT_GPIO4_INPUT_BINARY
+
+config FEATURE_COMPONENT_GPIO4_INPUT_BINARY_PULLUP
+    bool "Pull-up"
+
+config FEATURE_COMPONENT_GPIO4_INPUT_BINARY_PULLDOWN
+    bool "Pull-down"
+
+config FEATURE_COMPONENT_GPIO4_INPUT_BINARY_FLOATING
+    bool "Floating / no pull"
+
+endchoice
+
+
+choice FEATURE_COMPONENT_GPIO5_FUNCTION
+    prompt "GPIO 5 Function"
+    default FEATURE_COMPONENT_GPIO5_UNUSED
+
+config FEATURE_COMPONENT_GPIO5_UNUSED
+    bool "Unused"
+
+config FEATURE_COMPONENT_GPIO5_OUTPUT_ANALOG
+    bool "PWM Output"
+
+config FEATURE_COMPONENT_GPIO5_OUTPUT_BINARY
+    bool "Binary Output"
+
+config FEATURE_COMPONENT_GPIO5_INPUT_BINARY
+    bool "Binary Input"
+
+config FEATURE_COMPONENT_GPIO5_INPUT_ANALOG
+    bool "Analog Input"
+
+endchoice
+
+choice FEATURE_COMPONENT_GPIO5_INPUT_BINARY_PULL
+    prompt "GPIO 5 Binary Input Pull Mode"
+    default FEATURE_COMPONENT_GPIO5_INPUT_BINARY_PULLUP
+    depends on FEATURE_COMPONENT_GPIO5_INPUT_BINARY
+
+config FEATURE_COMPONENT_GPIO5_INPUT_BINARY_PULLUP
+    bool "Pull-up"
+
+config FEATURE_COMPONENT_GPIO5_INPUT_BINARY_PULLDOWN
+    bool "Pull-down"
+
+config FEATURE_COMPONENT_GPIO5_INPUT_BINARY_FLOATING
+    bool "Floating / no pull"
+
+endchoice
+
+choice FEATURE_COMPONENT_GPIO16_FUNCTION
+    prompt "GPIO 16 Function"
+    default FEATURE_COMPONENT_GPIO16_UNUSED
+
+config FEATURE_COMPONENT_GPIO16_UNUSED
+    bool "Unused"
+
+config FEATURE_COMPONENT_GPIO16_OUTPUT_ANALOG
+    bool "PWM Output"
+
+config FEATURE_COMPONENT_GPIO16_OUTPUT_BINARY
+    bool "Binary Output"
+
+config FEATURE_COMPONENT_GPIO16_INPUT_BINARY
+    bool "Binary Input"
+
+config FEATURE_COMPONENT_GPIO16_INPUT_ANALOG
+    bool "Analog Input"
+
+endchoice
+
+choice FEATURE_COMPONENT_GPIO16_INPUT_BINARY_PULL
+    prompt "GPIO 16 Binary Input Pull Mode"
+    default FEATURE_COMPONENT_GPIO16_INPUT_BINARY_PULLUP
+    depends on FEATURE_COMPONENT_GPIO16_INPUT_BINARY
+
+config FEATURE_COMPONENT_GPIO16_INPUT_BINARY_PULLUP
+    bool "Pull-up"
+
+config FEATURE_COMPONENT_GPIO16_INPUT_BINARY_PULLDOWN
+    bool "Pull-down"
+
+config FEATURE_COMPONENT_GPIO16_INPUT_BINARY_FLOATING
+    bool "Floating / no pull"
+
+endchoice
+
+choice FEATURE_COMPONENT_GPIO17_FUNCTION
+    prompt "GPIO 17 Function"
+    default FEATURE_COMPONENT_GPIO17_UNUSED
+
+config FEATURE_COMPONENT_GPIO17_UNUSED
+    bool "Unused"
+
+config FEATURE_COMPONENT_GPIO17_OUTPUT_ANALOG
+    bool "PWM Output"
+
+config FEATURE_COMPONENT_GPIO17_OUTPUT_BINARY
+    bool "Binary Output"
+
+config FEATURE_COMPONENT_GPIO17_INPUT_BINARY
+    bool "Binary Input"
+
+config FEATURE_COMPONENT_GPIO17_INPUT_ANALOG
+    bool "Analog Input"
+
+endchoice
+
+choice FEATURE_COMPONENT_GPIO17_INPUT_BINARY_PULL
+    prompt "GPIO 17 Binary Input Pull Mode"
+    default FEATURE_COMPONENT_GPIO17_INPUT_BINARY_PULLUP
+    depends on FEATURE_COMPONENT_GPIO17_INPUT_BINARY
+
+config FEATURE_COMPONENT_GPIO17_INPUT_BINARY_PULLUP
+    bool "Pull-up"
+
+config FEATURE_COMPONENT_GPIO17_INPUT_BINARY_PULLDOWN
+    bool "Pull-down"
+
+config FEATURE_COMPONENT_GPIO17_INPUT_BINARY_FLOATING
+    bool "Floating / no pull"
+
+endchoice
+
+choice FEATURE_COMPONENT_GPIO18_FUNCTION
+    prompt "GPIO 18 Function"
+    default FEATURE_GPI18_UNUSED
+
+config FEATURE_COMPONENT_GPIO18_UNUSED
+    bool "Unused"
+
+config FEATURE_COMPONENT_GPIO18_OUTPUT_ANALOG
+    bool "PWM Output"
+
+config FEATURE_COMPONENT_GPIO18_OUTPUT_BINARY
+    bool "Binary Output"
+
+config FEATURE_COMPONENT_GPIO18_INPUT_BINARY
+    bool "Binary Input"
+
+config FEATURE_COMPONENT_GPIO18_INPUT_ANALOG
+    bool "Analog Input"
+
+endchoice
+
+choice FEATURE_COMPONENT_GPIO18_INPUT_BINARY_PULL
+    prompt "GPIO 18 Binary Input Pull Mode"
+    default FEATURE_COMPONENT_GPIO18_INPUT_BINARY_PULLUP
+    depends on FEATURE_COMPONENT_GPIO18_INPUT_BINARY
+
+config FEATURE_COMPONENT_GPIO18_INPUT_BINARY_PULLUP
+    bool "Pull-up"
+
+config FEATURE_COMPONENT_GPIO18_INPUT_BINARY_PULLDOWN
+    bool "Pull-down"
+
+config FEATURE_COMPONENT_GPIO18_INPUT_BINARY_FLOATING
+    bool "Floating / no pull"
+
+endchoice
 
 endmenu
 

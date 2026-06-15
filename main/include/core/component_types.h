@@ -1,0 +1,9 @@
+#pragma once
+
+typedef enum {
+    DEVICE_TYPE_UNKNOWN = 0,
+    COMPONENT_OUTPUT_ANALOG,
+    COMPONENT_OUTPUT_BINARY,
+    COMPONENT_INPUT_BINARY,
+    COMPONENT_INPUT_ANALOG
+} component_type_t;

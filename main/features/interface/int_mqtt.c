@@ -191,7 +191,7 @@ static void mqttInterface_eventHandler(void *handler_args,esp_event_base_t base,
                 int state = atoi(data);
 
                 if (state == 0 || state == 1) {
-                    result = ioControl_setDevice(id, state);
+                    result = ioControl_setState(id, state);
                 } else {
                     ESP_LOGW(TAG, "Invalid state: %s", data);
                     break;

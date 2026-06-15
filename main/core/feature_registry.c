@@ -1,5 +1,22 @@
-#include "feature_registry.h"
 #include "sdkconfig.h"
+#include "feature_registry.h"
+#include "component_config.h"
+
+#if OUTPUT_ANALOG_COUNT > 0
+#include "output_analog.h"
+#endif
+
+#if OUTPUT_BINARY_COUNT > 0
+#include "output_binary.h"
+#endif
+
+#if INPUT_ANALOG_COUNT > 0
+#include "input_analog.h"
+#endif
+
+#if INPUT_BINARY_COUNT > 0
+#include "input_binary.h"
+#endif
 
 #if CONFIG_FEATURE_INTERFACE_CLI
 #include "int_cli.h"
@@ -7,22 +24,6 @@
 
 #if CONFIG_FEATURE_INTERFACE_MQTT
 #include "int_mqtt.h"
-#endif
-
-#if CONFIG_FEATURE_DEVICE_LIGHT
-#include "dev_light.h"
-#endif
-
-#if CONFIG_FEATURE_DEVICE_RELAY
-#include "dev_relay.h"
-#endif
-
-#if CONFIG_FEATURE_DEVICE_SENSOR
-#include "dev_sensor.h"
-#endif
-
-#if CONFIG_FEATURE_SECURITY_NONE
-#include "sec_none.h"
 #endif
 
 #if CONFIG_SERVICES_WIFIAP
@@ -53,17 +54,22 @@ void featureRegistry_Init(void)
     systemTime_init();
 #endif
 
-#if CONFIG_FEATURE_DEVICE_LIGHT
-    lightDevice_init();
+#if OUTPUT_ANALOG_COUNT > 0
+    analogOutput_init();
 #endif
 
-#if CONFIG_FEATURE_DEVICE_RELAY
-    relayDevice_init();
+#if OUTPUT_BINARY_COUNT > 0
+    binaryOutput_init();
 #endif
 
-#if CONFIG_FEATURE_DEVICE_SENSOR
-    sensorDevice_init();
+#if INPUT_ANALOG_COUNT > 0
+    analogInput_init();
 #endif
+
+#if INPUT_BINARY_COUNT > 0
+    binaryInput_init();
+#endif
+
 
 #if CONFIG_FEATURE_INTERFACE_CLI
     cliInterface_init();

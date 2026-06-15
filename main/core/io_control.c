@@ -1,5 +1,6 @@
 
 #include <stddef.h>
+#include <stdbool.h>
 
 #include "io_control.h"
 #include "device_manager.h"
@@ -37,7 +38,7 @@ int ioControl_getValue(int id)
     return deviceManager_getValue(dev);
 }
 
-ioControl_result_t ioControl_setDevice(int device_id, bool state)
+ioControl_result_t ioControl_setState(int device_id, bool state)
 {
     device_t *device = deviceManager_getId(device_id);
 
@@ -45,7 +46,7 @@ ioControl_result_t ioControl_setDevice(int device_id, bool state)
         return IOCONTROL_ERRORNOTFOUND;
     }
 
-    if (device->type == DEVICE_TYPE_SENSOR) {
+    if (device->type == COMPONENT_INPUT_BINARY) {
         return IOCONTROL_ERRORNOTSWITCHABLE;
     }
 
@@ -53,7 +54,7 @@ ioControl_result_t ioControl_setDevice(int device_id, bool state)
     return IOCONTROL_OK;
 }
 
-ioControl_result_t ioControl_setBrightness(int device_id, int brightness)
+ioControl_result_t ioControl_setLevel(int device_id, int level)
 {
     device_t *device = deviceManager_getId(device_id);
 
@@ -61,10 +62,10 @@ ioControl_result_t ioControl_setBrightness(int device_id, int brightness)
         return IOCONTROL_ERRORNOTFOUND;;
     }
 
-    if (device->type != DEVICE_TYPE_LIGHT) {
+    if (device->type != COMPONENT_OUTPUT_ANALOG) {
         return IOCONTROL_ERRORNOTSWITCHABLE;
     }
 
-    deviceManager_setBrightness(device, brightness);
+    deviceManager_setLevel(device, level);
     return IOCONTROL_OK;
 }
