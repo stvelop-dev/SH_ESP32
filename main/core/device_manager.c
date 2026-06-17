@@ -4,6 +4,7 @@
 #include "sdkconfig.h"
 #include "driver/gpio.h"
 #include "driver/ledc.h"
+#include "esp_adc/adc_oneshot.h"
 
 #include "device_manager.h"
 #include "component_config.h"
@@ -19,7 +20,6 @@ void deviceManager_init(void)
         devices[i].name = NULL;
         devices[i].type = COMPONENTS[i].type;
         devices[i].gpio_pin = COMPONENTS[i].gpio;
-        devices[i].level = false;
         devices[i].level = 0;
     }
 
@@ -42,6 +42,7 @@ device_t *deviceManager_getId(int id)
 
 void deviceManager_setState(device_t *device, bool state)
 {
+#if OUTPUT_ANALOG_COUNT > 0
     if (device->type == COMPONENT_OUTPUT_ANALOG) {
         if (state) {
             if (device->level == 0) {
@@ -54,6 +55,7 @@ void deviceManager_setState(device_t *device, bool state)
         }
         return;
     }
+#endif
 
     device->level = state;
     gpio_set_level(device->gpio_pin, state ? 1 : 0);
@@ -61,32 +63,39 @@ void deviceManager_setState(device_t *device, bool state)
 
 int deviceManager_getValue(device_t *device)
 {
-    switch (device->type) {
+#if INPUT_ANALOG_COUNT > 0
+    if (device->type == COMPONENT_INPUT_ANALOG) 
+    {
+        int raw;
 
-    case COMPONENT_INPUT_BINARY:
-        device->level = gpio_get_level(device->gpio_pin);
-        break;
+        adc_oneshot_unit_handle_t adc_handle = (adc_oneshot_unit_handle_t)device->driver.handle;
 
-    case COMPONENT_INPUT_ANALOG:
-        //adc_oneshot_read(adc_handle, device->adc_channel, &device->level);
-        break;
+        if (adc_handle == NULL) {
+            return -1;
+        }
 
-    default:
-        break;
+        if (adc_oneshot_read(adc_handle, (adc_channel_t)device->driver.channel, &raw) != ESP_OK) {
+            return -1;
+        }
+
+        device->level = raw;
+        return device->level;
     }
+#endif
 
+    device->level = gpio_get_level(device->gpio_pin);
     return device->level;
 }
 
+#if OUTPUT_ANALOG_COUNT > 0
 void deviceManager_setLevel(device_t *device, int level) 
 {
     if (level < 0) level = 0;
     if (level > 255) level = 255;
 
     device->level = level;
-    device->level = level > 0;
 
-    ledc_set_duty(LEDC_LOW_SPEED_MODE, device->pwm_channel, level);
-
-    ledc_update_duty(LEDC_LOW_SPEED_MODE, device->pwm_channel);
+    ledc_set_duty(LEDC_LOW_SPEED_MODE, device->driver.channel, level);
+    ledc_update_duty(LEDC_LOW_SPEED_MODE, device->driver.channel);
 }
+#endif

@@ -35,7 +35,6 @@ void binaryInput_init(void)
         }
 
         device->name = "Binary Input";
-        device->level = -1;
 
         binaryInput_initGpio(device);
 

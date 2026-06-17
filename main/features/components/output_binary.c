@@ -35,8 +35,7 @@ void binaryOutput_init(void)
         }
 
         device->name = "Binary Output";
-        device->level = false;
-        device->level = -1;
+        device->level = 0;
 
         binaryOutput_initGpio(device);
 

@@ -18,7 +18,7 @@ static void analogOutput_initGpio(device_t *device)
     ledc_channel_config_t channel = {
         .gpio_num = device->gpio_pin,
         .speed_mode = LEDC_LOW_SPEED_MODE,
-        .channel = device->pwm_channel,
+        .channel = device->driver.channel,
         .intr_type = LEDC_INTR_DISABLE,
         .timer_sel = LEDC_TIMER_0,
         .duty = 0,
@@ -60,9 +60,8 @@ void analogOutput_init(void)
         }
 
         device->name = "Analog Output";
-        device->level = false;
         device->level = 0;
-        device->pwm_channel = pwm_channel++;
+        device->driver.channel = pwm_channel++;
 
         analogOutput_initGpio(device);
 

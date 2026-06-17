@@ -12,14 +12,47 @@
 
 static const char *TAG = "Feat_InAna";
 
-static void analogInput_initGpio(device_t *device)
+static adc_oneshot_unit_handle_t adc1_handle = NULL;
+
+static void analogInput_initAdcUnit(void)
 {
-    gpio_reset_pin(device->gpio_pin);
-    gpio_set_direction(device->gpio_pin, GPIO_MODE_INPUT);
+    adc_oneshot_unit_init_cfg_t init_config = {
+        .unit_id = ADC_UNIT_1,
+    };
+
+    adc_oneshot_new_unit(&init_config, &adc1_handle);
+}
+
+static const adc_config_t *analogInput_getAdcConfig(gpio_num_t gpio)
+{
+    for (int i = 0; i < ADC_CONFIG_COUNT; i++) {
+        if (ADC_CONFIG[i].gpio == gpio) {
+            return &ADC_CONFIG[i];
+        }
+    }
+
+    return NULL;
+}
+
+static void analogInput_initAdcChannel(device_t *device)
+{
+    const adc_config_t *adc_config = analogInput_getAdcConfig(device->gpio_pin);
+
+    if (adc_config == NULL) {
+        return;
+    }
+
+    device->driver.handle = adc1_handle;
+    device->driver.channel = adc_config->channel;
+
+    adc_oneshot_chan_cfg_t channel_config = {.atten = ADC_ATTEN_DB_12, .bitwidth = ADC_BITWIDTH_DEFAULT,};
+    adc_oneshot_config_channel(adc1_handle, adc_config->channel, &channel_config);
 }
 
 void analogInput_init(void)
 {
+    analogInput_initAdcUnit();
+
     int count = deviceManager_getCount();
 
     for (int i = 0; i < count; i++) {
@@ -33,13 +66,11 @@ void analogInput_init(void)
             continue;
         }
 
+
         device->name = "Analog Input";
-        device->level = false;
-        device->level = -1;
+        device->level = 0;
 
-        analogInput_initGpio(device);
-
-        device->level = gpio_get_level(device->gpio_pin);
+        analogInput_initAdcChannel(device);
 
         ESP_LOGI(TAG, "Analog Input created with id %d on pin %d", device->id, device->gpio_pin);
     }

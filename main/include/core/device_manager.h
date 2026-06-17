@@ -4,12 +4,17 @@
 #include "component_types.h"
 
 typedef struct {
+    void *handle;
+    int  channel;
+} device_driver_t;
+
+typedef struct {
     int id;
     const char *name;
     component_type_t type;
     int gpio_pin;
-    int pwm_channel;
     int level;
+    device_driver_t driver;
 } device_t;
 
 void deviceManager_init(void);
