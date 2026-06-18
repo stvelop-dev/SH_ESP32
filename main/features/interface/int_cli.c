@@ -19,7 +19,7 @@ static void cliInterface_printHelp(void)
     printf("  list              List all devices\n");
     printf("  on <id>           Turn device on\n");
     printf("  off <id>          Turn device off\n");
-    printf("  bright <id> <val> Set level, e.g. bright 0 80\n");
+    printf("  level <id> <val> Set level, e.g. level 0 80\n");
     printf("\n");
 }
 
@@ -37,7 +37,7 @@ static void cliInterface_handleCommand(char *line)
         if (sscanf(line, "%*s %d", &id) == 1) {
             device_t *dev = deviceManager_getId(id);
             if (dev) {
-                ioControl_result_t result = ioControl_setState(dev->id, false);
+                ioControl_result_t result = ioControl_setState(dev->id, true);
                 if (result == IOCONTROL_ERRORNOTFOUND) {
                     printf("Error: Device not found\n");
                     return;
@@ -77,7 +77,7 @@ static void cliInterface_handleCommand(char *line)
         }
     }
 
-    else if (strcmp(cmd, "bright") == 0) {
+    else if (strcmp(cmd, "level") == 0) {
         if (sscanf(line, "%*s %d %d", &id, &value) == 2) {
             device_t *dev = deviceManager_getId(id);
             if (dev) {
@@ -104,8 +104,8 @@ static void cliInterface_handleCommand(char *line)
         for (int i = 0; i < count; i++) {
             device_t *dev = deviceManager_getId(i);
             if (dev) {
-                printf("ID:%d Name:%s On:%d Bright:%d\n",
-                       dev->id, dev->name, dev->level, dev->level);
+                printf("ID:%d Name:%s Level:%d\n",
+                       dev->id, dev->name, dev->level);
             }
         }
     }

@@ -46,7 +46,7 @@ ioControl_result_t ioControl_setState(int device_id, bool state)
         return IOCONTROL_ERRORNOTFOUND;
     }
 
-    if (device->type == COMPONENT_INPUT_BINARY) {
+    if (device->type != COMPONENT_OUTPUT_BINARY && device->type != COMPONENT_OUTPUT_ANALOG) {
         return IOCONTROL_ERRORNOTSWITCHABLE;
     }
 

@@ -34,7 +34,7 @@ git push -u github main
 - CLI Interface
 - MQTT Interface
 
-#### Devices
+#### Components
 - BinaryOutput
 - AnalogOutput
 - BinaryInput
