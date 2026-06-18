@@ -35,9 +35,10 @@ git push -u github main
 - MQTT Interface
 
 #### Devices
-- Light
-- Relay
-- Sensor
+- BinaryOutput
+- AnalogOutput
+- BinaryInput
+- AnalogInput
 
 ### Services
 - WiFi Client
@@ -46,10 +47,10 @@ git push -u github main
 
 ```
 main/
-├── core/               # Core initialization and startup
-├── services/           # WiFi
-├── features/interface  # CLI, MQTT
-└── features/device     # Lights, devices, sensors
+├── core/                   # Core initialization and startup
+├── services/               # WiFi
+├── features/interface      # CLI, MQTT
+└── features/components     # Inputs, Outputs
 ```
 
 ## Requirements
@@ -63,6 +64,12 @@ main/
 
 Configure the project using `menuconfig`:
 
+```
+Smarthome/
+├── Interfaces/             # Core initialization and startup
+├── IO Selection/           # Inputs, Outputs
+└── Services                # WiFi
+```
 - WiFi SSID and password
 - MQTT broker address
 - MQTT device ID
@@ -89,8 +96,9 @@ idf.py flash monitor
 
 | Topic | Description |
 |-------|-------------|
-| `smarthome/<MQTT_Device_ID>/device/<deviceID>/set`    | Control a device |
-| `smarthome/<MQTT_Device_ID>/device/<deviceID>/state`  | Device state |
+| `smarthome/<MQTT_Device_ID>/device/<deviceID>/set`            | Control binary output |
+| `smarthome/<MQTT_Device_ID>/device/<deviceID>/level/set`      | Control analog output |
+| `smarthome/<MQTT_Device_ID>/device/<deviceID>/state`          | Get I/O state |
 
 Payloads:
 
@@ -101,14 +109,22 @@ Payloads:
 
 ## Home Assistant
 
-The ESP32 automatically publishes MQTT Discovery configurations:
+Depending on configration the ESP32 automatically publishes MQTT Discovery:
 
 ```text
-homeassistant/sensor/<MQTT_Device_ID>_firmware/config
 homeassistant/switch/<MQTT_Device_ID>_device_<deviceID>/config
+homeassistant/number/<MQTT_Device_ID>_device_<deviceID>/config
+homeassistant/binary_sensor/<MQTT_Device_ID>_device_<deviceID>/config
+homeassistant/sensor/<MQTT_Device_ID>_device_<deviceID>/config
 ```
 
 ## Changelog
+
+### v0.2.0
+- Rename all devices to components, change structure and create components_config.h
+- Implement analog Input and pullup/ pulldowns to binary Input
+- Update mqtt publishes, discovery and for different pins
+- Update menuconfig, Pins validated and changed, checkbox for pullup and pulldown
 
 ### v0.1.2
 - Added Home Assistant MQTT Discovery support

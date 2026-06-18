@@ -76,10 +76,10 @@ static void mqtt_publish_discovery_binaryOutput(device_t *device)
             device->gpio_pin,
             CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID, device->id,
             CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID, device->gpio_pin,
-             CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID, device->id,
-             CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID, device->id,
-             CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID,
-             CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID);
+            CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID, device->id,
+            CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID, device->id,
+            CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID,
+            CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID);
 
     esp_mqtt_client_publish(mqtt_client, topic, payload, 0, 1, 1);
 }
@@ -115,10 +115,10 @@ static void mqtt_publish_discovery_analogOutput(device_t *device)
             device->gpio_pin,
             CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID, device->id,
             CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID, device->gpio_pin,
-             CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID, device->id,
-             CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID, device->id,
-             CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID,
-             CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID);
+            CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID, device->id,
+            CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID, device->id,
+            CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID,
+            CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID);
 
     esp_mqtt_client_publish(mqtt_client, topic, payload, 0, 1, 1);
 }
@@ -152,9 +152,9 @@ static void mqtt_publish_discovery_binaryInput(device_t *device)
             device->gpio_pin,
             CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID, device->id,
             CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID, device->gpio_pin,
-             CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID, device->id,
-             CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID,
-             CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID);
+            CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID, device->id,
+            CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID,
+            CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID);
 
     esp_mqtt_client_publish(mqtt_client, topic, payload, 0, 1, 1);
 }
@@ -187,9 +187,9 @@ static void mqtt_publish_discovery_analogInput(device_t *device)
             device->gpio_pin,
             CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID, device->id,
             CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID, device->gpio_pin,
-             CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID, device->id,
-             CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID,
-             CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID);
+            CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID, device->id,
+            CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID,
+            CONFIG_FEATURE_INTERFACE_MQTT_DEVICEID);
 
     esp_mqtt_client_publish(mqtt_client, topic, payload, 0, 1, 1);
 }
