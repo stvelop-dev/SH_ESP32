@@ -1,7 +1,6 @@
 #include "component_config.h"
 
-#if OUTPUT_ANALOG_COUNT > 0
-
+#include <stdint.h>
 #include "esp_log.h"
 #include "driver/gpio.h"
 #include "driver/ledc.h"
@@ -20,7 +19,7 @@ static void analogOutput_initGpio(device_t *device)
         .speed_mode = LEDC_LOW_SPEED_MODE,
         .channel = device->driver.channel,
         .intr_type = LEDC_INTR_DISABLE,
-        .timer_sel = LEDC_TIMER_0,
+        .timer_sel = device->driver.timer,
         .duty = 0,
         .hpoint = 0
     };
@@ -28,13 +27,13 @@ static void analogOutput_initGpio(device_t *device)
     ledc_channel_config(&channel);
 }
 
-static void analogOutput_initPwm(void)
+static void analogOutput_initPwm(device_t *device)
 {
     ledc_timer_config_t timer = {
         .speed_mode = LEDC_LOW_SPEED_MODE,
-        .timer_num = LEDC_TIMER_0,
+        .timer_num = device->driver.timer,
         .duty_resolution = LEDC_TIMER_8_BIT,
-        .freq_hz = 5000,
+        .freq_hz = device->driver.frequency,
         .clk_cfg = LEDC_AUTO_CLK
     };
 
@@ -43,8 +42,8 @@ static void analogOutput_initPwm(void)
 
 void analogOutput_init(void)
 {
-    analogOutput_initPwm();
     int pwm_channel = 0;
+    int pwm_timer = 0;
 
     int count = deviceManager_getCount();
 
@@ -62,11 +61,11 @@ void analogOutput_init(void)
         device->name = "Analog Output";
         device->level = 0;
         device->driver.channel = pwm_channel++;
+        device->driver.timer = pwm_timer++;
 
+        analogOutput_initPwm(device);
         analogOutput_initGpio(device);
 
         ESP_LOGI(TAG, "Analog Output created with id %d on pin %d", device->id, device->gpio_pin);
     }
 }
-
-#endif

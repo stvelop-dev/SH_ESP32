@@ -4,6 +4,7 @@ set(SRC_FILES
     "core/device_manager.c"
     "core/io_control.c"
     "core/feature_registry.c"
+    "core/component_config.c"
 
     "features/components/output_analog.c"
     "features/components/output_binary.c"
@@ -13,6 +14,7 @@ set(SRC_FILES
 
 set(INCLUDE_DIRS
     "include/core"
+    "include/core/components"
     "include/services"
     "include/features/interface"
     "include/features/components"

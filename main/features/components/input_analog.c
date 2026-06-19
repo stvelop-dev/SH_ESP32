@@ -1,7 +1,5 @@
 #include "component_config.h"
 
-#if INPUT_ANALOG_COUNT > 0
-
 #include "esp_log.h"
 #include "driver/gpio.h"
 #include "sdkconfig.h"
@@ -23,34 +21,48 @@ static void analogInput_initAdcUnit(void)
     adc_oneshot_new_unit(&init_config, &adc1_handle);
 }
 
-static const adc_config_t *analogInput_getAdcConfig(gpio_num_t gpio)
+static bool analogInput_getAdcConfig(int gpio, adc_config_t *config)
 {
-    for (int i = 0; i < ADC_CONFIG_COUNT; i++) {
-        if (ADC_CONFIG[i].gpio == gpio) {
-            return &ADC_CONFIG[i];
+    size_t count = componentConfig_getAdcCount();
+
+    for (size_t i = 0; i < count; i++) {
+        adc_config_t current;
+
+        if (!componentConfig_getAdc(i, &current)) {
+            ESP_LOGW(TAG, "ADC config get failed for index %u", (unsigned)i);
+            continue;
+        }
+
+        if ((int)current.gpio == gpio) {
+            *config = current;
+            return true;
         }
     }
 
-    return NULL;
+    return false;
 }
 
 static void analogInput_initAdcChannel(device_t *device)
 {
-    const adc_config_t *adc_config = analogInput_getAdcConfig(device->gpio_pin);
+    adc_config_t adc_config;
 
-    if (adc_config == NULL) {
+    if (!analogInput_getAdcConfig(device->gpio_pin, &adc_config)) {
         return;
     }
 
     device->driver.handle = adc1_handle;
-    device->driver.channel = adc_config->channel;
+    device->driver.channel = adc_config.channel;
 
     adc_oneshot_chan_cfg_t channel_config = {.atten = ADC_ATTEN_DB_12, .bitwidth = ADC_BITWIDTH_DEFAULT,};
-    adc_oneshot_config_channel(adc1_handle, adc_config->channel, &channel_config);
+    adc_oneshot_config_channel(adc1_handle, adc_config.channel, &channel_config);
 }
 
 void analogInput_init(void)
 {
+    if (componentConfig_getCountByType(COMPONENT_INPUT_ANALOG) == 0) {
+        return;
+    }
+
     analogInput_initAdcUnit();
 
     int count = deviceManager_getCount();
@@ -66,14 +78,12 @@ void analogInput_init(void)
             continue;
         }
 
-
         device->name = "Analog Input";
         device->level = 0;
 
         analogInput_initAdcChannel(device);
+        device->level = deviceManager_getValue(device);
 
-        ESP_LOGI(TAG, "Analog Input created with id %d on pin %d", device->id, device->gpio_pin);
+        ESP_LOGI(TAG, "Analog Input created with id %d on pin %d and channel %d", device->id, device->gpio_pin, device->driver.channel);
     }
 }
-
-#endif

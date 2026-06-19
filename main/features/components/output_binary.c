@@ -1,7 +1,5 @@
 #include "component_config.h"
 
-#if OUTPUT_BINARY_COUNT > 0
-
 #include "esp_log.h"
 #include "driver/gpio.h"
 #include "sdkconfig.h"
@@ -42,5 +40,3 @@ void binaryOutput_init(void)
         ESP_LOGI(TAG, "Binary Output created with id %d on pin %d", device->id, device->gpio_pin);
     }
 }
-
-#endif

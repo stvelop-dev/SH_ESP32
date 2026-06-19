@@ -2,21 +2,13 @@
 #include "feature_registry.h"
 #include "component_config.h"
 
-#if OUTPUT_ANALOG_COUNT > 0
 #include "output_analog.h"
-#endif
 
-#if OUTPUT_BINARY_COUNT > 0
 #include "output_binary.h"
-#endif
 
-#if INPUT_ANALOG_COUNT > 0
 #include "input_analog.h"
-#endif
 
-#if INPUT_BINARY_COUNT > 0
 #include "input_binary.h"
-#endif
 
 #if CONFIG_FEATURE_INTERFACE_CLI
 #include "int_cli.h"
@@ -54,21 +46,13 @@ void featureRegistry_Init(void)
     systemTime_init();
 #endif
 
-#if OUTPUT_ANALOG_COUNT > 0
     analogOutput_init();
-#endif
 
-#if OUTPUT_BINARY_COUNT > 0
     binaryOutput_init();
-#endif
 
-#if INPUT_ANALOG_COUNT > 0
     analogInput_init();
-#endif
 
-#if INPUT_BINARY_COUNT > 0
     binaryInput_init();
-#endif
 
 
 #if CONFIG_FEATURE_INTERFACE_CLI

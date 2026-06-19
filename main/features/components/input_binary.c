@@ -1,7 +1,5 @@
 #include "component_config.h"
 
-#if INPUT_BINARY_COUNT > 0
-
 #include "esp_log.h"
 #include "driver/gpio.h"
 #include "sdkconfig.h"
@@ -16,7 +14,7 @@ static void binaryInput_initGpio(device_t *device)
 {
     gpio_reset_pin(device->gpio_pin);
     gpio_set_direction(device->gpio_pin, GPIO_MODE_INPUT);
-    gpio_set_pull_mode(device->gpio_pin, COMPONENTS[device->id].pull_mode);
+    gpio_set_pull_mode(device->gpio_pin, (gpio_pull_mode_t)device->pull_mode);
 }
 
 void binaryInput_init(void)
@@ -38,10 +36,9 @@ void binaryInput_init(void)
 
         binaryInput_initGpio(device);
 
-        device->level = gpio_get_level(device->gpio_pin);
+        device->level = deviceManager_getValue(device);
 
         ESP_LOGI(TAG, "Binary Input created with id %d on pin %d", device->id, device->gpio_pin);
     }
 }
 
-#endif

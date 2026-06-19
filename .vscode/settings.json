@@ -1,10 +1,16 @@
 {
   "idf.currentSetup": "D:\\Projects\\Espressif\\idf\\.espressif\\v6.0.1\\esp-idf",
-  "idf.customExtraVars": {},
+  "idf.customExtraVars": {
+    "IDF_TARGET": "esp32"
+  },
   "clangd.path": "C:\\Espressif\\tools\\esp-clang\\esp-20.1.1_20250829\\esp-clang\\bin\\clangd.exe",
   "clangd.arguments": [
     "--background-index",
     "--query-driver=**",
-    "--compile-commands-dir=d:\\Projects\\Espressif\\SPLE\\SmartHome\\build"
+    "--compile-commands-dir=d:\\Projects\\Espressif\\Home\\SH_EPS32Client\\build"
+  ],
+  "idf.openOcdConfigs": [
+    "interface/ftdi/esp32_devkitj_v1.cfg",
+    "target/esp32.cfg"
   ]
 }

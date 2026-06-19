@@ -1,11 +1,14 @@
 #pragma once
 
 #include <stdbool.h>
+#include <stdint.h>
 #include "component_types.h"
 
 typedef struct {
     void *handle;
     int  channel;
+    int timer;
+    uint32_t frequency;
 } device_driver_t;
 
 typedef struct {
@@ -13,6 +16,7 @@ typedef struct {
     const char *name;
     component_type_t type;
     int gpio_pin;
+    int pull_mode;
     int level;
     device_driver_t driver;
 } device_t;

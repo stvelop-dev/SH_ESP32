@@ -9,31 +9,51 @@
 #include "device_manager.h"
 #include "component_config.h"
 
+#define DEVICE_MAX_COUNT 32
+
 static const char *TAG = "Core_DeMa";
 
-static device_t devices[COMPONENT_COUNT];
+static device_t devices[DEVICE_MAX_COUNT];
+static int device_count = 0;
 
 void deviceManager_init(void)
 {
-    for (int i = 0; i < COMPONENT_COUNT; i++) {
+    size_t count = componentConfig_getCount();
+
+    if (count > DEVICE_MAX_COUNT) {
+        ESP_LOGE(TAG, "Too many devices: %u > %d", (unsigned)count, DEVICE_MAX_COUNT);
+        count = DEVICE_MAX_COUNT;
+    }
+
+    device_count = (int)count;
+
+    for (int i = 0; i < device_count; i++) {
+        component_config_t config;
+
+        if (!componentConfig_get((size_t)i, &config)) {
+            continue;
+        }
+
         devices[i].id = i;
         devices[i].name = NULL;
-        devices[i].type = COMPONENTS[i].type;
-        devices[i].gpio_pin = COMPONENTS[i].gpio;
+        devices[i].type = config.type;
+        devices[i].gpio_pin = config.gpio;
+        devices[i].pull_mode = (int)config.pull_mode;
+        devices[i].driver.frequency = config.frequency;
         devices[i].level = 0;
     }
 
-    ESP_LOGI(TAG, "%d devices created.", COMPONENT_COUNT);
+    ESP_LOGI(TAG, "%d devices created.", device_count);
 }
 
 int deviceManager_getCount(void)
 {
-    return COMPONENT_COUNT;
+    return device_count;
 }
 
 device_t *deviceManager_getId(int id)
 {
-    if (id < 0 || id >= COMPONENT_COUNT) {
+    if (id < 0 || id >= device_count) {
         return NULL;
     }
 
@@ -42,7 +62,6 @@ device_t *deviceManager_getId(int id)
 
 void deviceManager_setState(device_t *device, bool state)
 {
-#if OUTPUT_ANALOG_COUNT > 0
     if (device->type == COMPONENT_OUTPUT_ANALOG) {
         if (state) {
             if (device->level == 0) {
@@ -55,7 +74,6 @@ void deviceManager_setState(device_t *device, bool state)
         }
         return;
     }
-#endif
 
     device->level = state;
     gpio_set_level(device->gpio_pin, state ? 1 : 0);
@@ -63,7 +81,6 @@ void deviceManager_setState(device_t *device, bool state)
 
 int deviceManager_getValue(device_t *device)
 {
-#if INPUT_ANALOG_COUNT > 0
     if (device->type == COMPONENT_INPUT_ANALOG) 
     {
         int raw;
@@ -74,20 +91,16 @@ int deviceManager_getValue(device_t *device)
             return -1;
         }
 
-        if (adc_oneshot_read(adc_handle, (adc_channel_t)device->driver.channel, &raw) != ESP_OK) {
-            return -1;
-        }
+        adc_oneshot_read(adc_handle, (adc_channel_t)device->driver.channel, &raw);
 
         device->level = raw;
         return device->level;
     }
-#endif
 
     device->level = gpio_get_level(device->gpio_pin);
     return device->level;
 }
 
-#if OUTPUT_ANALOG_COUNT > 0
 void deviceManager_setLevel(device_t *device, int level) 
 {
     if (level < 0) level = 0;
@@ -98,4 +111,3 @@ void deviceManager_setLevel(device_t *device, int level)
     ledc_set_duty(LEDC_LOW_SPEED_MODE, device->driver.channel, level);
     ledc_update_duty(LEDC_LOW_SPEED_MODE, device->driver.channel);
 }
-#endif
