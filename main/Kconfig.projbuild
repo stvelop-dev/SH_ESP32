@@ -17,7 +17,7 @@ menu "Mqtt Configuration"
 
 config FEATURE_INTERFACE_MQTT_BROKERURI
     string "MQTT Broker URI"
-    default "mqtt://192.168.178.65"
+    default ""
     depends on FEATURE_INTERFACE_MQTT
 
 config FEATURE_INTERFACE_MQTT_DEVICEID
@@ -453,15 +453,15 @@ menu "WiFi Configuration"
 
 config SERVICES_WIFICLIENT_SSID
     string "WiFi SSID"
-    default "Ovolus"
+    default ""
 
 config SERVICES_WIFICLIENT_PASSWORD
     string "WiFi Password"
-    default "Bolzplatz.2025"
+    default ""
 
 config SERVICES_WIFICLIENT_DNSSERVER
     string "DNS Server"
-    default "192.168.178.65"
+    default ""
 
 endmenu
 

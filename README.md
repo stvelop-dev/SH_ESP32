@@ -1,22 +1,25 @@
 
 # ESP32Client
 
-ESP32-based smart home client with MQTT communication, OTA firmware updates, and Home Assistant integration.
+Modular ESP32 smart home framework built with ESP-IDF, featuring MQTT, OTA updates and Home Assistant Discovery.
 
-Gitlab
-```
-cd existing_repo
-git remote add origin https://gitlab.com/homebase2025/esp32client.git
-git branch -M main
-git push -uf origin main
-```
+## Project Status
 
-Github
-```
-cd existing_repo
-git remote add github https://github.com/stvelop-dev/SH_ESP32.git
-git push -u github main
-```
+The project is under active development.
+
+Currently implemented:
+- Wi-Fi connectivity
+- MQTT communication
+- Home Assistant Discovery
+- Binary and analog I/O
+- Local OTA updates
+- Configuration through ESP-IDF menuconfig
+
+Planned:
+- Additional sensor components
+- Improved error recovery
+- Automated builds and tests
+- Support for additional ESP32 targets
 
 ## Architecture
 

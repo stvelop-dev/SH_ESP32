@@ -1,1 +1,5 @@
 build
+sdkconfig
+sdkconfig.old
+.vscode/settings.json
+managed_components
